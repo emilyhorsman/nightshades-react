@@ -13,15 +13,15 @@ class UserContainer extends Component {
   render() {
     const { authenticated, name, loading } = this.props
 
-    if (authenticated) {
-      return (<div>{name}</div>)
+    if (loading) {
+      return <Loader active={loading} />
     }
 
-    return (
-      <div>
-        <Loader active={loading} />
-      </div>
-    )
+    if (authenticated) {
+      return <div>Hello {name}! It’s good to see you.</div>
+    } else {
+      return <div>Not logged in!</div>
+    }
   }
 }
 
