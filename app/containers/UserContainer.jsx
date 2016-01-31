@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { api, fetchMe } from '../actions'
+import { api, logout, fetchMe } from '../actions'
 import Loader from '../components/Loader'
 
 class UserContainer extends Component {
@@ -24,20 +24,27 @@ class UserContainer extends Component {
   }
 
   render() {
-    const { authenticated, name, loading } = this.props
+    const { dispatch, authenticated, name, loading } = this.props
 
     if (loading) {
       return <Loader active={loading} />
     }
 
     if (authenticated) {
-      return <div>Hello {name}! It’s good to see you.</div>
+      return (
+        <div>
+          <p>Hello {name}! It’s good to see you.</p>
+          <button onClick={() => logout(dispatch)}>Logout</button>
+        </div>
+      )
     } else {
       const boundSignInTwitter = this.signIn.bind(this, 'twitter')
+      const boundSignInFacebook = this.signIn.bind(this, 'facebook')
 
       return (
         <div>
-          <button onClick={boundSignInTwitter}>Sign in with Twitter</button>
+          <button onClick={boundSignInTwitter}>Sign in with Twitter</button><br />
+          <button onClick={boundSignInFacebook}>Sign in with Facebook</button>
           <p>Not logged in!</p>
         </div>
       )

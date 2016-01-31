@@ -29,7 +29,13 @@ const user = (state = initialState, action) => {
         'authenticated': true,
         'name': action.data.attributes.name
       }
-
+    case 'FETCHING_LOGOUT':
+      return {
+        ...state,
+        'fetching': true
+      }
+    case 'FETCHING_LOGOUT_SUCCESS':
+      return initialState
     default:
       return state
   }
