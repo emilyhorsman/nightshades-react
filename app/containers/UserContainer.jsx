@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { api, logout, fetchMe } from '../actions'
 import Loader from '../components/Loader'
+import User from '../components/User'
+import SignIn from '../components/SignIn'
 
 class UserContainer extends Component {
   componentDidMount() {
@@ -32,23 +34,19 @@ class UserContainer extends Component {
 
     if (authenticated) {
       return (
-        <div>
-          <p>Hello {name}! It’s good to see you.</p>
-          <button onClick={() => logout(dispatch)}>Logout</button>
-        </div>
-      )
-    } else {
-      const boundSignInTwitter = this.signIn.bind(this, 'twitter')
-      const boundSignInFacebook = this.signIn.bind(this, 'facebook')
-
-      return (
-        <div>
-          <button onClick={boundSignInTwitter}>Sign in with Twitter</button><br />
-          <button onClick={boundSignInFacebook}>Sign in with Facebook</button>
-          <p>Not logged in!</p>
-        </div>
+        <User
+          name={name}
+          logout={() => logout(dispatch) }
+        />
       )
     }
+
+    return (
+      <SignIn
+        twitter={this.signIn.bind(this, 'twitter')}
+        facebook={this.signIn.bind(this, 'facebook')}
+      />
+    )
   }
 }
 
