@@ -1,4 +1,6 @@
-const api = (endpoint) => ('//api.nightshades.xyz:5000/v1' + endpoint)
+export function api(endpoint) {
+  return '//api.nightshades.xyz:5000/v1' + endpoint
+}
 
 export function fetchMe(dispatch) {
   dispatch({
