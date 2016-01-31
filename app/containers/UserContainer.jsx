@@ -13,10 +13,10 @@ class UserContainer extends Component {
     const { authenticated, name } = this.props
 
     if (authenticated) {
-      return <div>{{name}}</div>
+      return (<div>{name}</div>)
     }
 
-    return <div></div>
+    return (<div></div>)
   }
 }
 
