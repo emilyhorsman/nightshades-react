@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchMe } from '../actions'
+import Loader from '../components/Loader'
 
 class UserContainer extends Component {
   componentDidMount() {
@@ -10,20 +11,25 @@ class UserContainer extends Component {
   }
 
   render() {
-    const { authenticated, name } = this.props
+    const { authenticated, name, loading } = this.props
 
     if (authenticated) {
       return (<div>{name}</div>)
     }
 
-    return (<div></div>)
+    return (
+      <div>
+        <Loader active={loading} />
+      </div>
+    )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     authenticated: state.user.authenticated,
-    name: state.user.name
+    name: state.user.name,
+    loading: state.user.fetching
   }
 }
 
