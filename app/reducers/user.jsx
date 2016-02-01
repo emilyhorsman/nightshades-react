@@ -9,30 +9,30 @@ const user = (state = initialState, action) => {
     case 'FETCHING_ME':
       return {
         ...state,
-        'fetching': true
+        fetching: true
       }
     case 'FETCHING_ME_ERROR':
       return {
         ...state,
-        'fetching': false
+        fetching: false
       }
     case 'FETCHING_ME_SUCCESS':
       if (action.data.type !== 'user') {
         return {
           ...state,
-          'fetching': false
+          fetching: false
         }
       }
 
       return {
-        'fetching': false,
-        'authenticated': true,
-        'name': action.data.attributes.name
+        fetching: false,
+        authenticated: true,
+        name: action.data.attributes.name
       }
     case 'FETCHING_LOGOUT':
       return {
         ...state,
-        'fetching': true
+        fetching: true
       }
     case 'FETCHING_LOGOUT_SUCCESS':
       return initialState

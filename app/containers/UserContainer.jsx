@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { api, logout, fetchMe } from '../actions'
+import UnitsListContainer from './UnitsListContainer'
 import Loader from '../components/Loader'
 import User from '../components/User'
 import SignIn from '../components/SignIn'
@@ -34,10 +35,14 @@ class UserContainer extends Component {
 
     if (authenticated) {
       return (
-        <User
-          name={name}
-          logout={() => logout(dispatch) }
-        />
+        <div>
+          <User
+            name={name}
+            logout={() => logout(dispatch) }
+          />
+
+          <UnitsListContainer />
+        </div>
       )
     }
 
@@ -59,5 +64,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(
-    mapStateToProps
+  mapStateToProps
 )(UserContainer)

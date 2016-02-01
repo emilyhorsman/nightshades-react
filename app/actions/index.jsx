@@ -41,3 +41,24 @@ export function fetchMe(dispatch) {
       })
     })
 }
+
+export function fetchUnits(dispatch) {
+  dispatch({ type: 'FETCHING_UNITS' })
+
+  return fetch(api('/units'), fetchOpts)
+    .then(response => response.json())
+    .then(json => {
+      dispatch({
+        type: 'FETCHING_UNITS_SUCCESS',
+        data: json.data,
+        receivedAt: Date.now()
+      })
+    })
+    .catch(e => {
+      dispatch({
+        type: 'FETCHING_UNITS_ERROR',
+        message: e,
+        receivedAt: Date.now()
+      })
+    })
+}
