@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { api, logout, fetchMe } from '../actions'
+import { api, startTimer, logout, fetchMe } from '../actions'
+
+import NewUnitContainer from './NewUnitContainer'
 import UnitsListContainer from './UnitsListContainer'
 import Loader from '../components/Loader'
 import User from '../components/User'
@@ -41,6 +43,7 @@ class UserContainer extends Component {
             logout={() => logout(dispatch) }
           />
 
+          <NewUnitContainer />
           <UnitsListContainer />
         </div>
       )
