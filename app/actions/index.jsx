@@ -62,3 +62,41 @@ export function fetchUnits(dispatch) {
       })
     })
 }
+
+export function markComplete(dispatch, uuid) {
+  dispatch({
+    type: 'FETCHING_MARK_COMPLETE',
+    uuid: uuid
+  })
+
+  const body = new Blob([JSON.stringify({
+    data: {
+      type: 'unit',
+      id: uuid,
+      attributes: {
+        completed: true
+      }
+    }
+  })], { type: 'application/json' })
+
+  return fetch(api('/units/' + uuid), { ...fetchOpts, body: body, method: 'PATCH' })
+    .then(response => response.json())
+    .then(json => {
+      if (json.hasOwnProperty('errors')) {
+        return Promise.reject(json.errors[0].title)
+      }
+
+      dispatch({
+        type: 'FETCHING_MARK_COMPLETE_SUCCESS',
+        data: json.data,
+        receivedAt: Date.now()
+      })
+    })
+    .catch(e => {
+      dispatch({
+        type: 'FETCHING_MARK_COMPLETE_ERROR',
+        message: e,
+        receivedAt: Date.now()
+      })
+    })
+}

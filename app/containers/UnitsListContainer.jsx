@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUnits } from '../actions'
+import { markComplete, fetchUnits } from '../actions'
 import Loader from '../components/Loader'
 import UnitContainer from './UnitContainer'
 
@@ -22,6 +22,7 @@ class UnitsListContainer extends Component {
         {units.map(unit =>
           <UnitContainer
             key={++lastUnitId}
+            mark={() => markComplete(this.props.dispatch, unit.uuid)}
             {...unit}
           />
         )}

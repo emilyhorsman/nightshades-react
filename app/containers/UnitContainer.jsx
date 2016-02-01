@@ -4,12 +4,25 @@ import Moment from 'moment'
 class UnitContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = { delta: this.props.expiryTime.diff(Moment()) }
+
+    const delta = this.props.expiryTime.diff(Moment())
+    this.state = {
+      delta: delta,
+      markable: delta > 0
+    }
   }
 
   componentDidMount() {
     const tick = () => {
-      this.setState({ delta: this.props.expiryTime.diff(Moment()) })
+      this.setState({
+        ...this.state,
+        delta: this.props.expiryTime.diff(Moment())
+      })
+
+      if (this.state.delta <= 0 && this.state.markable) {
+        this.setState({ ...this.state, markable: false })
+        this.props.mark()
+      }
     }
 
     this.interval = setInterval(tick, 1000)

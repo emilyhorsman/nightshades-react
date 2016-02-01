@@ -30,6 +30,20 @@ const units = (state = initialState, action) => {
         ...state,
         fetching: false
       }
+    case 'FETCHING_MARK_COMPLETE_SUCCESS':
+      return {
+        ...state,
+        units: state.units.map(unit => {
+          if (unit.uuid !== action.data.id) {
+            return unit
+          }
+
+          return {
+            ...unit,
+            completed: action.data.attributes.completed
+          }
+        })
+      }
     default:
       return state
   }
