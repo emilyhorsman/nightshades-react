@@ -6,12 +6,20 @@ import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import createLogger from 'redux-logger'
 
+import promiseMiddleware from './middleware'
 import App from './containers/App'
 import root from './reducers'
 
+const loggerMiddleware = createLogger()
+const devToolsWrapper  = window.devToolsExtension ? window.devToolsExtension() : f => f
+
 const createFinalStore = compose(
-  applyMiddleware(createLogger()),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
+  applyMiddleware(
+    promiseMiddleware,
+    loggerMiddleware
+  ),
+
+  devToolWrapper
 )(createStore)
 const store = createFinalStore(root)
 
