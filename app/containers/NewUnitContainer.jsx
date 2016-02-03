@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Moment from 'moment'
+import Loader from '../components/Loader'
 import UnitForm from '../components/UnitForm'
 import { newUnit } from '../actions'
 
 class NewUnitContainer extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       delta: 1500,
       startTime: Moment(),
@@ -55,6 +57,12 @@ class NewUnitContainer extends Component {
   }
 
   render() {
+    const { loading } = this.props
+
+    if (loading) {
+      return <Loader active={loading} />
+    }
+
     return (
       <UnitForm
         handleDescriptionChange={this.onHandleDescriptionChange}
@@ -66,4 +74,12 @@ class NewUnitContainer extends Component {
   }
 }
 
-export default connect()(NewUnitContainer)
+const mapStateToProps = (state) => {
+  return {
+    loading: state.units.fetching_new
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(NewUnitContainer)

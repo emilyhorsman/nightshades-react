@@ -1,13 +1,13 @@
 import Moment from 'moment'
 
 const initialState = {
-  'fetching': false,
-  'units': []
+  fetching: false,
+  fetching_new: false,
+  units: []
 }
 
 const units = (state = initialState, action) => {
   switch (action.type) {
-    case 'NEW_UNIT_FETCHING':
     case 'UNITS_FETCHING':
       return {
         ...state,
@@ -26,7 +26,6 @@ const units = (state = initialState, action) => {
           }
         })
       }
-    case 'NEW_UNIT_ERROR':
     case 'UNITS_ERROR':
       return {
         ...state,
@@ -46,10 +45,15 @@ const units = (state = initialState, action) => {
           }
         })
       }
+    case 'NEW_UNIT_FETCHING':
+      return {
+        ...state,
+        fetching_new: true
+      }
     case 'NEW_UNIT_SUCCESS':
       return {
         ...state,
-        fetching: false,
+        fetching_new: false,
         units: [
           {
             uuid: action.data.id,
@@ -57,6 +61,11 @@ const units = (state = initialState, action) => {
             ...action.unit
           }
         ].concat(state.units)
+      }
+    case 'NEW_UNIT_ERROR':
+      return {
+        ...state,
+        fetching_new: false
       }
     default:
       return state
