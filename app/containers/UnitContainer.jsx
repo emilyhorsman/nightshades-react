@@ -48,16 +48,16 @@ class UnitContainer extends Component {
     } else {
       const display = Moment(this.state.delta).format('m [min] s [seconds]')
       statusDiv = (
-        <div className='ongoing'>Ongoing with {display}</div>
+        <div className="ongoing">Ongoing with {display}</div>
       )
     }
 
     return (
       <li>
         {statusDiv}
-        <div className='description'>{description}</div>
-        <div className='date'>{date}</div>
-        <div className='time'>{time}</div>
+        <div className="description">{description}</div>
+        <div className="date">{date}</div>
+        <div className="time">{time}</div>
       </li>
     )
   }

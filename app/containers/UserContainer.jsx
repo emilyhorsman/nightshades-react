@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { api, startTimer, logout, fetchMe } from '../actions'
+import { api, logout, fetchMe } from '../actions'
 
 import NewUnitContainer from './NewUnitContainer'
 import UnitsListContainer from './UnitsListContainer'
@@ -9,6 +9,14 @@ import User from '../components/User'
 import SignIn from '../components/SignIn'
 
 class UserContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.logout = () => logout(this.props.dispatch)
+
+    this.signInTwitter = this.signIn.bind(this, 'twitter')
+    this.signInFacebook = this.signIn.bind(this, 'facebook')
+  }
+
   componentDidMount() {
     fetchMe(this.props.dispatch)
   }
@@ -29,7 +37,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    const { dispatch, authenticated, name, loading } = this.props
+    const { authenticated, name, loading } = this.props
 
     if (loading) {
       return <Loader active={loading} />
@@ -40,7 +48,7 @@ class UserContainer extends Component {
         <div>
           <User
             name={name}
-            logout={() => logout(dispatch) }
+            logout={this.logout}
           />
 
           <NewUnitContainer />
@@ -51,8 +59,8 @@ class UserContainer extends Component {
 
     return (
       <SignIn
-        twitter={this.signIn.bind(this, 'twitter')}
-        facebook={this.signIn.bind(this, 'facebook')}
+        twitter={this.signInTwitter}
+        facebook={this.signInFacebook}
       />
     )
   }

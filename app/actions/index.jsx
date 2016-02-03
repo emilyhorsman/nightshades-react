@@ -58,7 +58,7 @@ export function newUnit(dispatch, attrs) {
   const body = new Blob([JSON.stringify({
     data: {
       type: 'unit',
-      attributes: attrs
+      attributes: attributes
     }
   })], { type: 'application/json' })
 

@@ -5,6 +5,11 @@ import Loader from '../components/Loader'
 import UnitContainer from './UnitContainer'
 
 class UnitsListContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.mark = (unit) => () => markComplete(this.props.dispatch, unit.uuid)
+  }
+
   componentDidMount() {
     fetchUnits(this.props.dispatch)
   }
@@ -22,7 +27,7 @@ class UnitsListContainer extends Component {
         {units.map(unit =>
           <UnitContainer
             key={++lastUnitId}
-            mark={() => markComplete(this.props.dispatch, unit.uuid)}
+            mark={this.mark(unit)}
             {...unit}
           />
         )}
