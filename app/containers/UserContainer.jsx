@@ -47,8 +47,8 @@ class UserContainer extends Component {
       return (
         <div>
           <User
-            name={name}
             logout={this.logout}
+            name={name}
           />
 
           <NewUnitContainer />
@@ -59,8 +59,8 @@ class UserContainer extends Component {
 
     return (
       <SignIn
-        twitter={this.signInTwitter}
         facebook={this.signInFacebook}
+        twitter={this.signInTwitter}
       />
     )
   }

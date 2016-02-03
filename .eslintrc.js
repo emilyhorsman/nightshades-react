@@ -21,6 +21,10 @@ module.exports = {
             "never"
         ],
         "jsx-quotes": 1,
+        "react/no-danger": 1,
+        "react/no-unknown-property": 1,
+        "react/no-direct-mutation-state": 1,
+        "react/jsx-sort-props": 1,
         "react/no-is-mounted": 1,
         "react/sort-comp": 1,
         "react/jsx-no-bind": 1,
@@ -32,7 +36,8 @@ module.exports = {
         "react/prefer-es6-class": 1,
         "react/no-multi-comp": 1,
         "react/jsx-uses-react": 1,
-        "react/react-in-jsx-scope": 1
+        "react/react-in-jsx-scope": 1,
+        "react/jsx-max-props-per-line": [1, {"maximum": 2}]
     },
     "env": {
         "es6": true,

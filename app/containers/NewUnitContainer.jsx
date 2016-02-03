@@ -57,9 +57,9 @@ class NewUnitContainer extends Component {
   render() {
     return (
       <UnitForm
+        handleDescriptionChange={this.onHandleDescriptionChange}
         handleSubmit={this.onHandleSubmit}
         handleTimeChange={this.onHandleTimeChange}
-        handleDescriptionChange={this.onHandleDescriptionChange}
         {...this.state}
       />
     )
