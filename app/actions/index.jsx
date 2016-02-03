@@ -68,3 +68,10 @@ export function newUnit(dispatch, attrs) {
     unit: attrs
   })
 }
+
+export function dismissError(dispatch, id) {
+  dispatch({
+    type: 'DISMISS_ERROR',
+    id: id
+  })
+}
