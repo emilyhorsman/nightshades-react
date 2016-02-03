@@ -5,3 +5,7 @@ engines:
 ratings:
   paths:
     - "app/**/*.jsx"
+
+exclude_paths:
+  - webpack.config.js
+  - .eslintrc.js
