@@ -48,3 +48,23 @@ export function markComplete(dispatch, uuid) {
     promise: fetchAPI('/units/' + uuid, { body: body, method: 'PATCH' })
   })
 }
+
+export function newUnit(dispatch, attrs) {
+  const attributes = {
+    description: attrs.description,
+    delta: attrs.delta
+  }
+
+  const body = new Blob([JSON.stringify({
+    data: {
+      type: 'unit',
+      attributes: attrs
+    }
+  })], { type: 'application/json' })
+
+  dispatch({
+    type: 'NEW_UNIT',
+    promise: fetchAPI('/units', { body: body, method: 'POST' }),
+    unit: attrs
+  })
+}

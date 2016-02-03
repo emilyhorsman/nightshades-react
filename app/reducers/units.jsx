@@ -7,6 +7,7 @@ const initialState = {
 
 const units = (state = initialState, action) => {
   switch (action.type) {
+    case 'NEW_UNIT_FETCHING':
     case 'UNITS_FETCHING':
       return {
         ...state,
@@ -25,6 +26,7 @@ const units = (state = initialState, action) => {
           }
         })
       }
+    case 'NEW_UNIT_ERROR':
     case 'UNITS_ERROR':
       return {
         ...state,
@@ -43,6 +45,18 @@ const units = (state = initialState, action) => {
             completed: action.data.attributes.completed
           }
         })
+      }
+    case 'NEW_UNIT_SUCCESS':
+      return {
+        ...state,
+        fetching: false,
+        units: [
+          {
+            uuid: action.data.id,
+            completed: false,
+            ...action.unit
+          }
+        ].concat(state.units)
       }
     default:
       return state

@@ -29,11 +29,13 @@ const fetchJSONMiddleware = ({ dispatch }) => (next) => (action) => {
       }
 
       // Prefer error messages following the JSON API spec.
-      if (payload.hasOwnProperty('errors')) {
-        return Promise.reject(payload.errors[0].title)
-      } else {
-        return Promise.reject(res.statusText)
-      }
+      return payload.then(json => {
+        if (json.hasOwnProperty('errors')) {
+          return Promise.reject(json.errors[0].title)
+        } else {
+          return Promise.reject(res.statusText)
+        }
+      })
     })
     .then(payload => {
       dispatch({
