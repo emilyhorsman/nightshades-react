@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import './styles.scss'
 
-const Loader = ({ active }) => {
+function Loader({ active }) {
   if (!active) {
     return <div></div>
   }
@@ -14,7 +14,7 @@ const Loader = ({ active }) => {
       <div></div>
     </div>
   )
-};
+}
 
 Loader.propTypes = {
   active: PropTypes.bool.isRequired

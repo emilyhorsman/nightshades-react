@@ -1,17 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 
-class SignIn extends Component {
-  render() {
-    const { twitter, facebook } = this.props
-
-    return (
-      <div>
-        <button onClick={twitter}>Sign in with Twitter</button><br />
-        <button onClick={facebook}>Sign in with Facebook</button>
-        <p>Not logged in!</p>
-      </div>
-    )
-  }
+function SignIn({ twitter, facebook }) {
+  return (
+    <div>
+      <button onClick={twitter}>Sign in with Twitter</button><br />
+      <button onClick={facebook}>Sign in with Facebook</button>
+      <p>Not logged in!</p>
+    </div>
+  )
 }
 
 SignIn.propTypes = {
