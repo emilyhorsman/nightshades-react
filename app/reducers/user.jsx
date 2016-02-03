@@ -6,17 +6,17 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCHING_ME':
+    case 'ME_FETCHING':
       return {
         ...state,
         fetching: true
       }
-    case 'FETCHING_ME_ERROR':
+    case 'ME_ERROR':
       return {
         ...state,
         fetching: false
       }
-    case 'FETCHING_ME_SUCCESS':
+    case 'ME_SUCCESS':
       if (action.data.type !== 'user') {
         return {
           ...state,
@@ -29,12 +29,12 @@ const user = (state = initialState, action) => {
         authenticated: true,
         name: action.data.attributes.name
       }
-    case 'FETCHING_LOGOUT':
+    case 'LOGOUT_FETCHING':
       return {
         ...state,
         fetching: true
       }
-    case 'FETCHING_LOGOUT_SUCCESS':
+    case 'LOGOUT_SUCCESS':
       return initialState
     default:
       return state

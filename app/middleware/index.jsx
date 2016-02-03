@@ -12,10 +12,14 @@ const fetchJSONMiddleware = ({ dispatch }) => (next) => (action) => {
     return next(action)
   }
 
-  // We still want to give the next middlware's dispatcher this action
-  next(action)
-
   const { type, promise, ...args } = action
+
+  // We still want to give the next middleware's dispatcher this action
+  next({
+    type: type + '_FETCHING',
+    ...args
+  })
+
 
   return promise
     .then(res => ({ res: res, payload: res.json() }))

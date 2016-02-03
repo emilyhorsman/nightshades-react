@@ -7,12 +7,12 @@ const initialState = {
 
 const units = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCHING_UNITS':
+    case 'UNITS_FETCHING':
       return {
         ...state,
         fetching: true
       }
-    case 'FETCHING_UNITS_SUCCESS':
+    case 'UNITS_SUCCESS':
       return {
         fetching: false,
         units: action.data.map(unit => {
@@ -25,12 +25,12 @@ const units = (state = initialState, action) => {
           }
         })
       }
-    case 'FETCHING_UNITS_ERROR':
+    case 'UNITS_ERROR':
       return {
         ...state,
         fetching: false
       }
-    case 'FETCHING_MARK_COMPLETE_SUCCESS':
+    case 'MARK_COMPLETE_SUCCESS':
       return {
         ...state,
         units: state.units.map(unit => {
