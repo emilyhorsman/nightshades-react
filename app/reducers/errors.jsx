@@ -9,6 +9,11 @@ const errors = (state = [], action) => {
     return state
   }
 
+  // We don't want to display an error stating that we're logged out.
+  if (action.type === 'ME_ERROR') {
+    return state
+  }
+
   return [{
     id: ++errorIDSequence,
     ...action
