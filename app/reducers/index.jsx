@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import errors from './errors'
-import user from './user'
-import units from './units'
+import ErrorsReducer from './ErrorsReducer'
+import UserReducer from './UserReducer'
+import UnitsReducer from './UnitsReducer'
 
-const rootReducer = combineReducers({
-  errors,
-  user,
-  units
+const RootReducer = combineReducers({
+  errors: ErrorsReducer,
+  user: UserReducer,
+  units: UnitsReducer
 })
 
-export default rootReducer
+export default RootReducer

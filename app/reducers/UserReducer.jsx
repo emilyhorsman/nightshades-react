@@ -4,7 +4,7 @@ const initialState = {
   'name': ''
 }
 
-const user = (state = initialState, action) => {
+const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ME_FETCHING':
       return {
@@ -41,4 +41,4 @@ const user = (state = initialState, action) => {
   }
 }
 
-export default user
+export default UserReducer

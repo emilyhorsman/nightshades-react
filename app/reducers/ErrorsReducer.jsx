@@ -1,6 +1,6 @@
 let errorIDSequence = 0
 
-const errors = (state = [], action) => {
+const ErrorsReducer = (state = [], action) => {
   if (action.type === 'DISMISS_ERROR') {
     return state.filter(error => error.id !== action.id)
   }
@@ -20,4 +20,4 @@ const errors = (state = [], action) => {
   }].concat(state)
 }
 
-export default errors
+export default ErrorsReducer

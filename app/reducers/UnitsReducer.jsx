@@ -6,7 +6,7 @@ const initialState = {
   units: []
 }
 
-const units = (state = initialState, action) => {
+const UnitsReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'UNITS_FETCHING':
       return {
@@ -72,4 +72,4 @@ const units = (state = initialState, action) => {
   }
 }
 
-export default units
+export default UnitsReducer
