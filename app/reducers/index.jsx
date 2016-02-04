@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
-import ErrorsReducer from './ErrorsReducer'
-import UserReducer from './UserReducer'
-import UnitsReducer from './UnitsReducer'
+import { default as ErrorDomain } from './ErrorsReducer'
+import { default as UserDomain } from './UserReducer'
+import { default as UnitsDomain } from './UnitsReducer'
 import { default as NewUnitDomain } from './NewUnitReducer'
 
 const RootReducer = combineReducers({
-  errors: ErrorsReducer,
-  user: UserReducer,
-  units: UnitsReducer,
+  ErrorDomain,
+  UserDomain,
+  UnitsDomain,
   NewUnitDomain
 })
 

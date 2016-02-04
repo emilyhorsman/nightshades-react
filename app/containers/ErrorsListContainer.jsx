@@ -29,7 +29,7 @@ class ErrorsListContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    errors: state.errors
+    errors: state.ErrorDomain
   }
 }
 

@@ -74,9 +74,9 @@ class UserContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    authenticated: state.user.authenticated,
-    name: state.user.name,
-    loading: state.user.fetching
+    authenticated: state.UserDomain.authenticated,
+    name: state.UserDomain.name,
+    loading: state.UserDomain.fetching
   }
 }
 

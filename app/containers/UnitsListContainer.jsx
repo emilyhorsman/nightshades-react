@@ -41,8 +41,8 @@ class UnitsListContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    units: state.units.units,
-    loading: state.units.fetching
+    units: state.UnitsDomain.units,
+    loading: state.UnitsDomain.fetching
   }
 }
 
