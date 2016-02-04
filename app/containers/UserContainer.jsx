@@ -19,7 +19,12 @@ class UserContainer extends Component {
   }
 
   componentDidMount() {
+    this.interval = setInterval(this.props.actions.tick.bind(this), 1000)
     this.props.actions.fetchMe()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   signIn(provider) {

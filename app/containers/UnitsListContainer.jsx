@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { markComplete, fetchUnits } from '../actions'
+
+import * as actions from '../actions/Units'
 import Loader from '../components/Loader'
 import UnitContainer from './UnitContainer'
 
 class UnitsListContainer extends Component {
   constructor(props) {
     super(props)
-    this.mark = (unit) => () => markComplete(this.props.dispatch, unit.uuid)
+
+    this.onMarkComplete = (id) => props.actions.markComplete.bind(this, id)
   }
 
   componentDidMount() {
-    fetchUnits(this.props.dispatch)
+    this.props.actions.fetchUnits()
   }
 
   render() {
@@ -27,7 +30,7 @@ class UnitsListContainer extends Component {
         {units.map(unit =>
           <UnitContainer
             key={++lastUnitId}
-            mark={this.mark(unit)}
+            markComplete={this.onMarkComplete(unit.uuid)}
             {...unit}
           />
         )}
@@ -43,6 +46,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(UnitsListContainer)

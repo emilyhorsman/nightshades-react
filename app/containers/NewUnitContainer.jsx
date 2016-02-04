@@ -1,56 +1,36 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
 import Moment from 'moment'
+
 import Loader from '../components/Loader'
 import UnitForm from '../components/UnitForm'
-import { newUnit } from '../actions'
+import * as actions from '../actions/NewUnit'
 
 class NewUnitContainer extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      delta: 1500,
-      startTime: Moment(),
-      expiryTime: Moment().add(1500, 'seconds'),
-      description: ''
-    }
 
     this.onHandleSubmit = this.handleSubmit.bind(this)
     this.onHandleTimeChange = this.handleTimeChange.bind(this)
     this.onHandleDescriptionChange = this.handleDescriptionChange.bind(this)
   }
 
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({
-        ...this.state,
-        startTime: Moment(),
-        expiryTime: Moment().add(this.state.delta, 'seconds')
-      })
-    }, 1000)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval)
-  }
-
   handleSubmit(event) {
     event.preventDefault()
-    newUnit(this.props.dispatch, this.state)
+    this.props.actions.newUnit(this.props.unit)
   }
 
   handleDescriptionChange(event) {
-    this.setState({
-      ...this.state,
+    this.props.actions.change({
       description: event.target.value
     })
   }
 
   handleTimeChange(event) {
     const seconds = Math.max(2, Math.min(120, event.target.value)) * 60
-    this.setState({
-      ...this.state,
+    this.props.actions.change({
       delta: seconds,
       expiryTime: Moment().add(seconds, 'seconds')
     })
@@ -68,7 +48,7 @@ class NewUnitContainer extends Component {
         handleDescriptionChange={this.onHandleDescriptionChange}
         handleSubmit={this.onHandleSubmit}
         handleTimeChange={this.onHandleTimeChange}
-        {...this.state}
+        {...this.props.unit}
       />
     )
   }
@@ -76,10 +56,18 @@ class NewUnitContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.units.fetching_new
+    loading: state.NewUnitDomain.fetching,
+    unit: state.NewUnitDomain.unit
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actions, dispatch)
   }
 }
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(NewUnitContainer)

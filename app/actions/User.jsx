@@ -13,3 +13,9 @@ export function fetchMe() {
     promise: fetchAPI('/me')
   }
 }
+
+export function tick() {
+  return {
+    type: 'TICK'
+  }
+}

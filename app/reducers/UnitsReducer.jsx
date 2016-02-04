@@ -2,8 +2,13 @@ import Moment from 'moment'
 
 const initialState = {
   fetching: false,
-  fetching_new: false,
   units: []
+}
+
+function isExpired({ expiry_time, expiry_threshold_seconds }) {
+  const t = Moment(expiry_time)
+  t.add(expiry_threshold_seconds, 'seconds')
+  return Moment() > t
 }
 
 const UnitsReducer = (state = initialState, action) => {
@@ -17,13 +22,22 @@ const UnitsReducer = (state = initialState, action) => {
       return {
         fetching: false,
         units: action.data.map(unit => {
-          return {
+          const expiryTime = Moment(unit.attributes.expiry_time)
+
+          let _unit = {
             uuid: unit.id,
             description: unit.attributes.description,
             completed: unit.attributes.completed,
+            expired: isExpired(unit.attributes),
             startTime: Moment(unit.attributes.start_time),
-            expiryTime: Moment(unit.attributes.expiry_time)
+            expiryTime: expiryTime
           }
+
+          if (!_unit.expired) {
+            _unit.delta = expiryTime.diff(Moment())
+          }
+
+          return _unit
         })
       }
     case 'UNITS_ERROR':
@@ -45,27 +59,35 @@ const UnitsReducer = (state = initialState, action) => {
           }
         })
       }
-    case 'NEW_UNIT_FETCHING':
-      return {
-        ...state,
-        fetching_new: true
-      }
     case 'NEW_UNIT_SUCCESS':
+      const expiryTime = Moment(action.data.attributes.expiry_time)
       return {
         ...state,
-        fetching_new: false,
         units: [
           {
             uuid: action.data.id,
-            completed: false,
-            ...action.unit
+            description: action.data.attributes.description,
+            expired: isExpired(action.data.attributes),
+            completed: action.data.attributes.completed,
+            startTime: Moment(action.data.attributes.start_time),
+            expiryTime: expiryTime,
+            delta: expiryTime.diff(Moment())
           }
         ].concat(state.units)
       }
-    case 'NEW_UNIT_ERROR':
+    case 'TICK':
       return {
         ...state,
-        fetching_new: false
+        units: state.units.map(unit => {
+          if (unit.completed || unit.expired) {
+            return unit
+          }
+
+          return {
+            ...unit,
+            delta: unit.expiryTime.diff(Moment())
+          }
+        })
       }
     default:
       return state

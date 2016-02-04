@@ -4,49 +4,46 @@ import Moment from 'moment'
 class UnitContainer extends Component {
   constructor(props) {
     super(props)
-
-    const delta = this.props.expiryTime.diff(Moment())
-    this.state = {
-      delta: delta,
-      markable: delta > 0
-    }
+    this.state = { markedComplete: props.expired }
   }
 
-  componentDidMount() {
-    const tick = () => {
-      this.setState({
-        ...this.state,
-        delta: this.props.expiryTime.diff(Moment())
-      })
-
-      if (this.state.delta <= 0 && this.state.markable) {
-        this.setState({ ...this.state, markable: false })
-        this.props.mark()
-      }
+  componentWillReceiveProps(nextProps) {
+    // Let's check if it's time to tell the server that this unit is complete.
+    if (!nextProps.hasOwnProperty('delta')) {
+      return
     }
 
-    this.interval = setInterval(tick, 1000)
-  }
+    if (this.state.markedComplete || this.props.completed) {
+      return
+    }
 
-  componentWillUnmount() {
-    clearInterval(this.interval)
+    if (nextProps.delta <= 0) {
+      this.setState({ markedComplete: true })
+      this.props.markComplete()
+    }
   }
 
   render() {
-    const { completed, description, startTime, expiryTime } = this.props
+    const { expired, completed, description, startTime, expiryTime } = this.props
 
     const date = startTime.format('YYYY MMM Do')
     const time = `from ${startTime.format('hh:mm A')} to ${expiryTime.format('hh:mm A')} (${expiryTime.diff(startTime, 'minutes')} minutes)`
 
     let statusDiv = <div></div>
-    if (this.state.delta <= 0) {
-      const statusClass = completed ? 'completed' : 'expired'
-      const friendlyStatus = statusClass[0].toUpperCase() + statusClass.slice(1)
+    if (!completed && expired) {
       statusDiv = (
-        <div className={statusClass}>{friendlyStatus} {expiryTime.fromNow()}</div>
+        <div className="expired">Expired {expiryTime.fromNow()}</div>
+      )
+    } else if (completed) {
+      statusDiv = (
+        <div className="completed">Completed {expiryTime.fromNow()}</div>
+      )
+    } else if (this.props.delta <= 0) {
+      statusDiv = (
+        <div className="ongoing">Completing…</div>
       )
     } else {
-      const display = Moment(this.state.delta).format('m [min] s [seconds]')
+      const display = Moment(this.props.delta).format('m [min] s [seconds]')
       statusDiv = (
         <div className="ongoing">Ongoing with {display}</div>
       )
@@ -64,6 +61,7 @@ class UnitContainer extends Component {
 }
 
 UnitContainer.propTypes = {
+  markComplete: PropTypes.func.isRequired,
   description: PropTypes.string,
   completed: PropTypes.bool.isRequired,
   startTime: PropTypes.object.isRequired,
