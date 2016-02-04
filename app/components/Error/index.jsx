@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react'
 
-function Error({ message, handleDismiss }) {
+function Error({ message, onDismiss }) {
   return (
     <div>
       <p>{message}</p>
-      <button onClick={handleDismiss}>Dismiss</button>
+      <button onClick={onDismiss}>Dismiss</button>
     </div>
   )
 }
 
 Error.propTypes = {
   message: PropTypes.string.isRequired,
-  handleDismiss: PropTypes.func.isRequired
+  onDismiss: PropTypes.func.isRequired
 }
 
 export default Error

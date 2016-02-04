@@ -1,27 +1,25 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { dismissError } from '../actions'
+import * as actions from '../actions/Errors'
 import Error from '../components/Error'
 
 class ErrorsListContainer extends Component {
   constructor(props) {
     super(props)
 
-    this.onHandleDismiss = (id) => this.handleDismiss.bind(this, id)
-  }
-
-  handleDismiss(id) {
-    dismissError(this.props.dispatch, id)
+    this.onDismiss = (id) => props.actions.dismissError.bind(this, id)
   }
 
   render() {
+    const { errors } = this.props
     return (
       <ul>
-        {this.props.errors.map(error =>
+        {errors.map(error =>
           <Error
-            handleDismiss={this.onHandleDismiss(error.id)}
             key={error.id}
             message={error.message}
+            onDismiss={this.onDismiss(error.id)}
           />
         )}
       </ul>
@@ -35,6 +33,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ErrorsListContainer)
