@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { api, logout, fetchMe } from '../actions'
 
+import * as actions from '../actions/User'
+import { api } from '../actions'
 import NewUnitContainer from './NewUnitContainer'
 import UnitsListContainer from './UnitsListContainer'
 import Loader from '../components/Loader'
@@ -11,14 +13,13 @@ import SignIn from '../components/SignIn'
 class UserContainer extends Component {
   constructor(props) {
     super(props)
-    this.logout = () => logout(this.props.dispatch)
 
-    this.signInTwitter = this.signIn.bind(this, 'twitter')
-    this.signInFacebook = this.signIn.bind(this, 'facebook')
+    this.onLogout = props.actions.logout.bind(this)
+    this.signInWith = (provider) => this.signIn.bind(this, provider)
   }
 
   componentDidMount() {
-    fetchMe(this.props.dispatch)
+    this.props.actions.fetchMe()
   }
 
   signIn(provider) {
@@ -28,7 +29,7 @@ class UserContainer extends Component {
     const onCompletion = (ev) => {
       if (ev.data == 'COMPLETE') {
         authWindow.close()
-        fetchMe(this.props.dispatch)
+        this.props.actions.fetchMe()
         window.removeEventListener('message', onCompletion, true)
       }
     }
@@ -47,8 +48,8 @@ class UserContainer extends Component {
       return (
         <div>
           <User
-            logout={this.logout}
             name={name}
+            onLogout={this.onLogout}
           />
 
           <NewUnitContainer />
@@ -59,8 +60,8 @@ class UserContainer extends Component {
 
     return (
       <SignIn
-        facebook={this.signInFacebook}
-        twitter={this.signInTwitter}
+        facebook={this.signInWith('facebook')}
+        twitter={this.signInWith('twitter')}
       />
     )
   }
@@ -74,6 +75,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(UserContainer)

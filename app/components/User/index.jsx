@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react'
 
-function User({ name, logout }) {
+function User({ name, onLogout }) {
   return (
     <div>
       <p>Hello {name}! It’s good to see you.</p>
-      <button onClick={logout}>Logout</button>
+      <button onClick={onLogout}>Logout</button>
     </div>
   )
 }
 
 User.propTypes = {
   name: PropTypes.string.isRequired,
-  logout: PropTypes.func.isRequired
+  onLogout: PropTypes.func.isRequired
 }
 
 export default User
