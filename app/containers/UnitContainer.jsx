@@ -2,23 +2,17 @@ import React, { Component, PropTypes } from 'react'
 import Moment from 'moment'
 
 class UnitContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { markedComplete: props.expired }
-  }
-
   componentWillReceiveProps(nextProps) {
     // Let's check if it's time to tell the server that this unit is complete.
-    if (!nextProps.hasOwnProperty('delta')) {
+    if (nextProps.fetching || !nextProps.hasOwnProperty('delta')) {
       return
     }
 
-    if (this.state.markedComplete || this.props.completed) {
+    if (nextProps.completed) {
       return
     }
 
     if (nextProps.delta <= 0) {
-      this.setState({ markedComplete: true })
       this.props.markComplete()
     }
   }

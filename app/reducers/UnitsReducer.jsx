@@ -45,6 +45,20 @@ const UnitsReducer = (state = initialState, action) => {
         ...state,
         fetching: false
       }
+    case 'MARK_COMPLETE_FETCHING':
+      return {
+        ...state,
+        units: state.units.map(unit => {
+          if (unit.uuid !== action.uuid) {
+            return unit
+          }
+
+          return {
+            ...unit,
+            fetching: true
+          }
+        })
+      }
     case 'MARK_COMPLETE_SUCCESS':
       return {
         ...state,
@@ -65,6 +79,7 @@ const UnitsReducer = (state = initialState, action) => {
         ...state,
         units: [
           {
+            fetching: false,
             uuid: action.data.id,
             description: action.data.attributes.description,
             expired: isExpired(action.data.attributes),
