@@ -21,7 +21,10 @@ class UnitContainer extends Component {
     const { expired, completed, description, startTime, expiryTime } = this.props
 
     const date = startTime.format('YYYY MMM Do')
-    const time = `from ${startTime.format('hh:mm A')} to ${expiryTime.format('hh:mm A')} (${expiryTime.diff(startTime, 'minutes')} minutes)`
+    const startDisplay = startTime.format('hh:mm A')
+    const expiryDisplay = expiryTime.format('hh:mm A')
+    const lengthDisplay = expiryTime.diff(startTime, 'minutes')
+    const time = `from ${startDisplay} to ${expiryDisplay} (${lengthDisplay} minutes)`
 
     let statusDiv = <div></div>
     if (!completed && expired) {
