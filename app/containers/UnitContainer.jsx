@@ -18,7 +18,7 @@ class UnitContainer extends Component {
   }
 
   render() {
-    return <li><Unit {...this.props} /></li>
+    return <li className="unit"><Unit {...this.props} /></li>
   }
 }
 

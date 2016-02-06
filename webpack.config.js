@@ -28,6 +28,12 @@ var common = {
         test: /\.scss$/,
         loader: 'style!css!sass',
         include: __dirname + '/app'
+      },
+
+      {
+        test: /\.css$/,
+        loader: 'style!css',
+        include: __dirname + '/app'
       }
     ]
   },

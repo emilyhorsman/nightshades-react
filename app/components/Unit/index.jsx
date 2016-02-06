@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import Moment from 'moment'
 
+import './styles.scss'
+
 function Unit({ description, completed, expired, delta, startTime, expiryTime, tags }) {
   let statusDiv = <div></div>
   if (!completed && expired) {
