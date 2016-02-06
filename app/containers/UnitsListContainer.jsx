@@ -18,7 +18,7 @@ class UnitsListContainer extends Component {
   }
 
   render() {
-    const { units, loading, actions } = this.props
+    const { units, loading, actions, canCancel } = this.props
 
     if (loading) {
       return <Loader active={loading} />
@@ -27,7 +27,7 @@ class UnitsListContainer extends Component {
     let lastUnitId = 0
     return (
       <div>
-        <button onClick={actions.cancelOngoing}>Cancel Ongoing Timer</button>
+        <button onClick={actions.cancelOngoing} disabled={!canCancel}>Cancel Ongoing Timer</button>
         <ol>
           {units.map(unit =>
             <UnitContainer
@@ -45,7 +45,8 @@ class UnitsListContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     units: state.UnitsDomain.units,
-    loading: state.UnitsDomain.fetching
+    loading: state.UnitsDomain.fetching,
+    canCancel: state.NewUnitDomain.disabled
   }
 }
 
