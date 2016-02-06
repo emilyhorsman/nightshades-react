@@ -40,7 +40,14 @@ const NewUnitReducer = (state = initialState, action) => {
         fetching: false
       }
     case 'NEW_UNIT_SUCCESS':
-      return initialState
+      return {
+        ...state,
+        fetching: false,
+        unit: {
+          ...state.unit,
+          description: ''
+        }
+      }
     default:
       return state
   }
