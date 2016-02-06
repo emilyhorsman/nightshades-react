@@ -12,7 +12,7 @@ class UnitContainer extends Component {
       return
     }
 
-    if (nextProps.delta <= 0) {
+    if (nextProps.delta <= -100) {
       this.props.markComplete()
     }
   }
