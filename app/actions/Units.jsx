@@ -24,3 +24,10 @@ export function markComplete(uuid) {
     promise: fetchAPI('/units/' + uuid, { body: body, method: 'PATCH' })
   }
 }
+
+export function cancelOngoing() {
+  return {
+    type: 'CANCEL_ONGOING',
+    promise: fetchAPI('/units', { method: 'DELETE' })
+  }
+}

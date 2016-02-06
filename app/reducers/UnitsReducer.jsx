@@ -13,6 +13,7 @@ function isExpired({ expiry_time, expiry_threshold_seconds }) {
 
 const UnitsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'CANCEL_ONGOING_FETCHING':
     case 'UNITS_FETCHING':
       return {
         ...state,
@@ -40,6 +41,7 @@ const UnitsReducer = (state = initialState, action) => {
           return _unit
         })
       }
+    case 'CANCEL_ONGOING_ERROR':
     case 'UNITS_ERROR':
       return {
         ...state,
@@ -89,6 +91,12 @@ const UnitsReducer = (state = initialState, action) => {
             delta: expiryTime.diff(Moment())
           }
         ].concat(state.units)
+      }
+    case 'CANCEL_ONGOING_SUCCESS':
+      return {
+        ...state,
+        fetching: false,
+        units: state.units.filter(unit => unit.complete || unit.expired)
       }
     case 'TICK':
       return {

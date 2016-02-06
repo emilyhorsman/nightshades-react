@@ -18,7 +18,7 @@ class UnitsListContainer extends Component {
   }
 
   render() {
-    const { units, loading } = this.props
+    const { units, loading, actions } = this.props
 
     if (loading) {
       return <Loader active={loading} />
@@ -26,15 +26,18 @@ class UnitsListContainer extends Component {
 
     let lastUnitId = 0
     return (
-      <ol>
-        {units.map(unit =>
-          <UnitContainer
-            key={++lastUnitId}
-            markComplete={this.onMarkComplete(unit.uuid)}
-            {...unit}
-          />
-        )}
-      </ol>
+      <div>
+        <button onClick={actions.cancelOngoing}>Cancel Ongoing Timer</button>
+        <ol>
+          {units.map(unit =>
+            <UnitContainer
+              key={++lastUnitId}
+              markComplete={this.onMarkComplete(unit.uuid)}
+              {...unit}
+            />
+          )}
+        </ol>
+      </div>
     )
   }
 }
