@@ -1,14 +1,9 @@
 import Moment from 'moment'
+import { isExpired } from './helpers'
 
 const initialState = {
   fetching: false,
   units: []
-}
-
-function isExpired({ expiry_time, expiry_threshold_seconds }) {
-  const t = Moment(expiry_time)
-  t.add(expiry_threshold_seconds, 'seconds')
-  return Moment() > t
 }
 
 const UnitsReducer = (state = initialState, action) => {

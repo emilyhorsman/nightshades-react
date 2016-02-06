@@ -1,4 +1,5 @@
 import Moment from 'moment'
+import { isExpired } from './helpers'
 
 const initialState = {
   fetching: false,
@@ -57,6 +58,16 @@ const NewUnitReducer = (state = initialState, action) => {
       return {
         ...state,
         disabled: false
+      }
+    case 'UNITS_SUCCESS':
+      // Disable new unit submission if there is a currently ongoing unit.
+      if (!action.data.find(unit => !isExpired(unit.attributes))) {
+        return state
+      }
+
+      return {
+        ...state,
+        disabled: true
       }
     default:
       return state
