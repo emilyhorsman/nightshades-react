@@ -19,6 +19,10 @@ const ErrorsReducer = (state = [], action) => {
         return state
       }
 
+      if (typeof action.message !== 'string') {
+        return state
+      }
+
       return [{
         id: ++errorIDSequence,
         ...action
