@@ -34,6 +34,10 @@ const UnitsReducer = (state = initialState, action) => {
             expiryTime: expiryTime
           }
 
+          if (unit.attributes.hasOwnProperty('tags')) {
+            _unit.tags = unit.attributes.tags
+          }
+
           if (!_unit.expired) {
             _unit.delta = expiryTime.diff(Moment())
           }
@@ -77,20 +81,24 @@ const UnitsReducer = (state = initialState, action) => {
       }
     case 'NEW_UNIT_SUCCESS':
       const expiryTime = Moment(action.data.attributes.expiry_time)
+      let unit = {
+        fetching: false,
+        uuid: action.data.id,
+        description: action.data.attributes.description,
+        expired: isExpired(action.data.attributes),
+        completed: action.data.attributes.completed,
+        startTime: Moment(action.data.attributes.start_time),
+        expiryTime: expiryTime,
+        delta: expiryTime.diff(Moment()),
+      }
+
+      if (action.data.attributes.hasOwnProperty('tags')) {
+        unit.tags = action.data.attributes.tags
+      }
+
       return {
         ...state,
-        units: [
-          {
-            fetching: false,
-            uuid: action.data.id,
-            description: action.data.attributes.description,
-            expired: isExpired(action.data.attributes),
-            completed: action.data.attributes.completed,
-            startTime: Moment(action.data.attributes.start_time),
-            expiryTime: expiryTime,
-            delta: expiryTime.diff(Moment())
-          }
-        ].concat(state.units)
+        units: [unit].concat(state.units)
       }
     case 'CANCEL_ONGOING_SUCCESS':
       return {

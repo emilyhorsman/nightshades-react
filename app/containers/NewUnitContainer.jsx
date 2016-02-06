@@ -13,6 +13,7 @@ class NewUnitContainer extends Component {
     super(props)
 
     this.onHandleSubmit = this.handleSubmit.bind(this)
+    this.onHandleTagsChange = this.handleTagsChange.bind(this)
     this.onHandleTimeChange = this.handleTimeChange.bind(this)
     this.onHandleDescriptionChange = this.handleDescriptionChange.bind(this)
   }
@@ -25,6 +26,12 @@ class NewUnitContainer extends Component {
   handleDescriptionChange(event) {
     this.props.actions.change({
       description: event.target.value
+    })
+  }
+
+  handleTagsChange(event) {
+    this.props.actions.change({
+      tags: event.target.value
     })
   }
 
@@ -48,6 +55,7 @@ class NewUnitContainer extends Component {
         disabled={this.props.disabled}
         handleDescriptionChange={this.onHandleDescriptionChange}
         handleSubmit={this.onHandleSubmit}
+        handleTagsChange={this.onHandleTagsChange}
         handleTimeChange={this.onHandleTimeChange}
         {...this.props.unit}
       />

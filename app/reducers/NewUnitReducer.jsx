@@ -7,7 +7,8 @@ const initialState = {
     delta: 1500,
     description: '',
     startTime: Moment(),
-    expiryTime: Moment().add(1500, 'seconds')
+    expiryTime: Moment().add(1500, 'seconds'),
+    tags: []
   }
 }
 

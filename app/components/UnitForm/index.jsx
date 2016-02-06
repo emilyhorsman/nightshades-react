@@ -11,8 +11,10 @@ function UnitForm({
   description,
   disabled,
   handleSubmit,
+  handleTagsChange,
   handleTimeChange,
-  handleDescriptionChange
+  handleDescriptionChange,
+  tags
 }) {
   return (
     <div className='new-timer'>
@@ -34,6 +36,10 @@ function UnitForm({
           cols='40'
          />
          <br />
+
+         <label htmlFor='tags'>Tags</label>
+         <input type='text' id='tags' value={tags} onChange={handleTagsChange} /><br />
+
         <button disabled={disabled}>Start Timer</button>
       </form>
     </div>
@@ -46,6 +52,7 @@ UnitForm.propTypes = {
   description: PropTypes.string,
   disabled: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handleTagsChange: PropTypes.func.isRequired,
   handleTimeChange: PropTypes.func.isRequired,
   handleDescriptionChange: PropTypes.func.isRequired
 }

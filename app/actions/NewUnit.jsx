@@ -13,7 +13,8 @@ export function newUnit(attributes) {
       type: 'unit',
       attributes: {
         description: attributes.description,
-        delta: attributes.delta
+        delta: attributes.delta,
+        tags: attributes.tags
       }
     }
   })], { type: 'application/json' })
