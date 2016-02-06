@@ -5,6 +5,7 @@ footer, header, hgroup, menu, nav, section {
 
 html {
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
 
 *, *:before, *:after {
@@ -12,6 +13,5 @@ html {
 }
 
 body {
-  font-family: sans-serif;
   margin: 0;
 }
