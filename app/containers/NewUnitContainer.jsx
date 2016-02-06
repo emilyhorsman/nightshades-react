@@ -45,6 +45,7 @@ class NewUnitContainer extends Component {
 
     return (
       <UnitForm
+        disabled={this.props.disabled}
         handleDescriptionChange={this.onHandleDescriptionChange}
         handleSubmit={this.onHandleSubmit}
         handleTimeChange={this.onHandleTimeChange}
@@ -57,6 +58,7 @@ class NewUnitContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     loading: state.NewUnitDomain.fetching,
+    disabled: state.NewUnitDomain.disabled,
     unit: state.NewUnitDomain.unit
   }
 }

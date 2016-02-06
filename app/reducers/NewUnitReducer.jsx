@@ -2,6 +2,7 @@ import Moment from 'moment'
 
 const initialState = {
   fetching: false,
+  disabled: false,
   unit: {
     delta: 1500,
     description: '',
@@ -32,12 +33,14 @@ const NewUnitReducer = (state = initialState, action) => {
     case 'NEW_UNIT_FETCHING':
       return {
         ...state,
-        fetching: true
+        fetching: true,
+        disabled: true
       }
     case 'NEW_UNIT_ERROR':
       return {
         ...state,
-        fetching: false
+        fetching: false,
+        disabled: false
       }
     case 'NEW_UNIT_SUCCESS':
       return {
@@ -47,6 +50,12 @@ const NewUnitReducer = (state = initialState, action) => {
           ...state.unit,
           description: ''
         }
+      }
+    case 'CANCEL_ONGOING_SUCCESS':
+    case 'MARK_COMPLETE_SUCCESS':
+      return {
+        ...state,
+        disabled: false
       }
     default:
       return state

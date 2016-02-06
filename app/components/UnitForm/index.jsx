@@ -9,6 +9,7 @@ function UnitForm({
   expiryTime,
   delta,
   description,
+  disabled,
   handleSubmit,
   handleTimeChange,
   handleDescriptionChange
@@ -33,7 +34,7 @@ function UnitForm({
           cols='40'
          />
          <br />
-        <button>Start Timer</button>
+        <button disabled={disabled}>Start Timer</button>
       </form>
     </div>
   )
@@ -43,6 +44,7 @@ UnitForm.propTypes = {
   expiryTime: PropTypes.object.isRequired,
   delta: PropTypes.number.isRequired,
   description: PropTypes.string,
+  disabled: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleTimeChange: PropTypes.func.isRequired,
   handleDescriptionChange: PropTypes.func.isRequired
