@@ -84,7 +84,7 @@ const UnitsReducer = (state = initialState, action) => {
         completed: action.data.attributes.completed,
         startTime: Moment(action.data.attributes.start_time),
         expiryTime: expiryTime,
-        delta: expiryTime.diff(Moment()),
+        delta: expiryTime.diff(Moment())
       }
 
       if (action.data.attributes.hasOwnProperty('tags')) {
