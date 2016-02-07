@@ -40,7 +40,7 @@ function UnitForm({
          <label htmlFor='tags'>Tags</label>
          <input type='text' id='tags' value={tags} onChange={handleTagsChange} /><br />
 
-        <button disabled={disabled}>Start Timer</button>
+        <button className="-green" disabled={disabled}>Start Timer</button>
       </form>
     </div>
   )

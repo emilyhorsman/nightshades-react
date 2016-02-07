@@ -14,4 +14,69 @@ html {
 
 body {
   margin: 0;
+  padding: 20px;
+}
+
+@mixin button-colour($base, $fg: white) {
+  background-color: $base;
+  border-color: darken($base, 15%);
+  color: $fg;
+  box-shadow: 0 0 1px transparentize($base, 0.4);
+  border-radius: 1px;
+
+  &:hover {
+    background-color: darken($base, 15%);
+    color: $fg;
+  }
+
+  &:focus {
+    outline: 1px solid darken($base, 15%);
+  }
+
+  &:focus:active {
+    outline: none;
+  }
+
+  &[disabled] {
+    border-color: white;
+    color: grey;
+    background-color: white;
+  }
+}
+
+$w: 5px;
+button {
+  position: relative;
+  border: 0;
+  border-bottom-width: $w;
+  border-bottom-style: solid;
+  padding: 15px 25px 15px - $w;
+  line-height: 16px;
+  height: 46px;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  font-family: 'Open Sans';
+  text-shadow: 0 0 1px rgba(0,0,0,0.2);
+  margin: 10px 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: translateY(4px);
+    border-bottom-width: 1px;
+  }
+
+  &[disabled] {
+    cursor: auto;
+  }
+
+  @include button-colour(#78909C);
+
+  &.-red { @include button-colour(#ff5252); }
+  &.-light-blue { @include button-colour(#b3e5fc, black); }
+  &.-green { @include button-colour(#43A047); }
 }
