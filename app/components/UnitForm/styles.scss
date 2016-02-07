@@ -1,10 +1,81 @@
 .new-timer form label {
   display: block;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .new-timer {
   padding-bottom: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #dfdfdf;
+}
+
+form .form-group {
+  display: inline-table;
+  vertical-align: middle;
+
+  .addon,
+  > input {
+    display: table-cell;
+  }
+}
+
+$bg: #eceeef;
+$fg: #55595c;
+$border: #ccc;
+form .timer-length {
+  input,
+  .addon {
+    border-color: $border;
+  }
+
+  input {
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    width: 60px;
+  }
+
+  .addon,
+  label {
+    font-weight: 400;
+  }
+
+  .addon {
+    background-color: $bg;
+    color: $fg;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 10px;
+
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  display: block;
+
+  margin: 20px 0;
+  border: 0;
+  border-radius: 0;
+  height: 5px;
+  padding: 0;
+  background-color: #B2DFDB;
+  width: 400px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #b2bdfb;
 }

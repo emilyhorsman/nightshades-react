@@ -17,28 +17,31 @@ function UnitForm({
   tags
 }) {
   return (
-    <div className='new-timer'>
+    <div className="new-timer">
       <form onSubmit={handleSubmit}>
-        <label htmlFor='time'>Time (ending at {formatExpiry(expiryTime)})</label>
-        <input type='number' id='time' value={delta / 60} onChange={handleTimeChange} /><br />
+        <div className="form-group timer-length">
+          <label className="addon" htmlFor="time">Length</label>
+          <input type="number" id="time" value={delta / 60} onChange={handleTimeChange} />
+          <span className="addon">ends at {formatExpiry(expiryTime)}</span>
+        </div>
 
-        <label htmlFor='timeSlider'>Time Slider</label>
-        <input type='range' id='timeSlider' value={delta / 60} onChange={handleTimeChange} min={2} max={120} /><br />
+        <label htmlFor="timeSlider" className="sr-only">Time Slider</label>
+        <input type="range" id="timeSlider" value={delta / 60} onChange={handleTimeChange} min={2} max={120} /><br />
 
-        <label htmlFor='description'>Description</label>
+        <label htmlFor="description">Description</label>
         <textarea
           value={description}
           onChange={handleDescriptionChange}
-          name='description'
-          id='description'
-          placeholder='What are we doing this time?'
-          rows='2'
-          cols='40'
+          name="description"
+          id="description"
+          placeholder="What are we doing this time?"
+          rows="2"
+          cols="40"
          />
          <br />
 
-         <label htmlFor='tags'>Tags</label>
-         <input type='text' id='tags' value={tags} onChange={handleTagsChange} /><br />
+         <label htmlFor="tags">Tags</label>
+         <input type="text" id="tags" value={tags} onChange={handleTagsChange} /><br />
 
         <button className="-green" disabled={disabled}>Start Timer</button>
       </form>
