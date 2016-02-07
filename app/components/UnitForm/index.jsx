@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import TagsInput from 'react-tagsinput'
 import Moment from 'moment'
 
 import './styles.scss'
@@ -41,7 +42,11 @@ function UnitForm({
          <br />
 
          <label htmlFor="tags">Tags</label>
-         <input type="text" id="tags" value={tags} onChange={handleTagsChange} /><br />
+         <TagsInput
+           addKeys={[9, 13, 188]}
+           value={tags}
+           onChange={handleTagsChange}
+         />
 
         <button className="-green" disabled={disabled}>Start Timer</button>
       </form>

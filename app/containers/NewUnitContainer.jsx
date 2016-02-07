@@ -29,9 +29,9 @@ class NewUnitContainer extends Component {
     })
   }
 
-  handleTagsChange(event) {
+  handleTagsChange(tags) {
     this.props.actions.change({
-      tags: event.target.value
+      tags: tags
     })
   }
 

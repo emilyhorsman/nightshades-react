@@ -27,7 +27,11 @@ class UnitsListContainer extends Component {
     let lastUnitId = 0
     return (
       <div>
-        <button className="-red" disabled={!canCancel} onClick={actions.cancelOngoing}>Cancel Timer</button>
+        <button
+          className="-red"
+          disabled={!canCancel}
+          onClick={actions.cancelOngoing}
+        >Cancel Timer</button>
         <ol className="units">
           {units.map(unit =>
             <UnitContainer
