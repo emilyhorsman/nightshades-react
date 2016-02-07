@@ -42,6 +42,7 @@ const UnitsReducer = (state = initialState, action) => {
       }
     case 'CANCEL_ONGOING_ERROR':
     case 'UNITS_ERROR':
+    case 'MARK_COMPLETE_ERROR':
       return {
         ...state,
         fetching: false
