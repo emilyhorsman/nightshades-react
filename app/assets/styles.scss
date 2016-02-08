@@ -104,3 +104,63 @@ input {
   clip: rect(0,0,0,0);
   border: 0;
 }
+
+.react-tagsinput {
+  border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  margin: 10px 0;
+  padding: 5px 8px;
+  width: 400px;
+  display: inline-block;
+
+  input {
+    border: 0;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+$tag-height: 35px;
+$tag-sub-height: $tag-height * 0.75;
+$tag-bg: #b2dfdb;
+$tag-bg: #fce4ec;
+.react-tagsinput-tag {
+  background-color: $tag-bg;
+  display: inline-block;
+  padding-left: 20px;
+  margin: 3px;
+  height: $tag-height;
+  border-radius: $tag-height / 2;
+}
+
+// We need to ensure the tap target of the remove button remains large
+a.react-tagsinput-remove {
+  height: 100%;
+  width: $tag-height;
+  padding-left: 6px;
+  box-sizing: content-box;
+  display: inline-block;
+
+  &:after {
+    content: '×';
+    text-align: center;
+    background-color: darken($tag-bg, 5%);
+    margin: ($tag-height - $tag-sub-height) / 2;
+    height: $tag-sub-height;
+    width: $tag-sub-height;
+    line-height: $tag-sub-height;
+    display: inline-block;
+    border-radius: 50%;
+    transition: all 0.25s ease;
+  }
+
+  &:hover {
+    cursor: pointer;
+    &:after {
+      background-color: darken($tag-bg, 10%);
+      transform: scale(1.05);
+    }
+  }
+}
