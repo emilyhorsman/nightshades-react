@@ -14,7 +14,7 @@ export function newUnit(attributes) {
       attributes: {
         description: attributes.description,
         delta: attributes.delta,
-        tags: attributes.tags
+        tags: attributes.tags.join(',')
       }
     }
   })], { type: 'application/json' })
