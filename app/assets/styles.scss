@@ -106,21 +106,15 @@ input {
 }
 
 .react-tagsinput {
-  border-radius: 5px;
-  border: 1px solid #dfdfdf;
   margin: 10px 0;
   padding: 5px 8px;
   width: 400px;
   display: inline-block;
 
   input {
-    border: 0;
+    margin-top: 5px;
     display: block;
     width: 100%;
-
-    &:focus {
-      outline: none;
-    }
   }
 }
 
