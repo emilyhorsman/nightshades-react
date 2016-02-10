@@ -1,4 +1,26 @@
 @import 'vendor/material-color/material-color';
 
+
+$primary-fg: rgba(0, 0, 0, 0.87);
+$secondary-fg: rgba(0, 0, 0, 0.54);
+
+// Three hues from the primary palette
+$primary: $clr-indigo;
+$primary-hue-a: $clr-indigo-300;
+$primary-hue-b: $clr-indigo-500;
+
+$primary: $clr-deep-purple-600;
+$primary-hue-a: $clr-deep-purple-400;
+$primary-hue-b: $clr-deep-purple-700;
+
+$primary-action: $primary-hue-a;
+
+
+// One accent from the secondary palette
+$accent: $clr-pink-a200;
+$accent-hue-a: $clr-pink-a100;
+
 /** Tags **/
 $tag-bg: $clr-pink-50;
+$tag-height: 35px;
+$tag-sub-height: $tag-height * 0.75;

@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react'
 
+import './styles.scss'
+
 function User({ name, onLogout }) {
   return (
-    <div>
+    <div className="user-meta">
       <p>Hello {name}! It’s good to see you.</p>
-      <button onClick={onLogout}>Logout</button>
+      <button className="secondary" onClick={onLogout}>Logout</button>
     </div>
   )
 }

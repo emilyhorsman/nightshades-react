@@ -1,3 +1,5 @@
+@import '../../assets/variables';
+
 button {
   display: block;
 }
@@ -13,6 +15,10 @@ button {
   border-bottom: 1px solid #dfdfdf;
 }
 
+
+$bg: #eceeef;
+$fg: #55595c;
+$border: #ccc;
 form .form-group {
   display: inline-table;
   vertical-align: middle;
@@ -20,46 +26,51 @@ form .form-group {
   .addon,
   > input {
     display: table-cell;
-  }
-}
-
-$bg: #eceeef;
-$fg: #55595c;
-$border: #ccc;
-form .timer-length {
-  input,
-  .addon {
     border-color: $border;
+  }
+
+  .addon {
+    background-color: $bg;
+    border-width: 1px;
+    border-style: solid;
   }
 
   input {
     border-radius: 0;
     border-left-width: 0;
     border-right-width: 0;
+  }
+
+  .addon:first-child,
+  label:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  .addon:last-child,
+  label:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-width: 1px;
+  }
+}
+
+form .timer-length {
+  input {
     width: 60px;
   }
 
   .addon,
   label {
+    color: $secondary-fg;
     font-weight: 400;
   }
 
   .addon {
     background-color: $bg;
-    color: $fg;
     border-width: 1px;
     border-style: solid;
     padding: 0 10px;
-
-    &:first-child {
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-    }
-
-    &:last-child {
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
   }
 }
 
@@ -67,19 +78,46 @@ input[type=range] {
   -webkit-appearance: none;
   display: block;
 
-  margin: 20px 0;
+  position: relative;
+  margin: 20px 15px;
+  margin-right: 30px;
   border: 0;
   border-radius: 0;
   height: 5px;
   padding: 0;
-  background-color: #B2DFDB;
+  background-color: rgba(0, 0, 0, 0.26);
   width: 400px;
+
+  &:focus,
+  &:active {
+    background-color: rgba(0, 0, 0, 0.38);
+    outline: none;
+  }
+
+  &:before,
+  &:after {
+    position: absolute;
+    top: 0;
+    line-height: 5px;
+  }
+
+  &:before {
+    content: attr(min);
+    left: -15px;
+  }
+
+  &:after {
+    content: attr(max);
+    right: -35px;
+  }
 }
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 15px;
-  height: 15px;
+  margin-top: -1px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background-color: #b2bdfb;
+  border: 2px solid white;
+  background-color: $primary;
 }

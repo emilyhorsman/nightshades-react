@@ -17,6 +17,8 @@ html {
 body {
   margin: 0;
   padding: 20px;
+  border-top: 6px solid $primary;
+  color: $primary-fg;
 }
 
 @mixin button-colour($base, $fg: white) {
@@ -59,7 +61,6 @@ button {
   font-weight: 300;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
-  font-family: 'Open Sans';
   text-shadow: 0 0 1px rgba(0,0,0,0.2);
   margin: 10px 0;
 
@@ -76,11 +77,9 @@ button {
     cursor: auto;
   }
 
-  @include button-colour(#78909C);
+  @include button-colour($primary-action);
 
-  &.-red { @include button-colour(#ff5252); }
-  &.-light-blue { @include button-colour(#b3e5fc, black); }
-  &.-green { @include button-colour(#43A047); }
+  &.-red { @include button-colour($clr-red-400); }
 }
 
 textarea,
@@ -120,8 +119,6 @@ input {
   }
 }
 
-$tag-height: 35px;
-$tag-sub-height: $tag-height * 0.75;
 .react-tagsinput-tag {
   background-color: $tag-bg;
   display: inline-block;
