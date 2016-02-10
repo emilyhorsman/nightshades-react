@@ -1,0 +1,21 @@
+{
+  "name": "nightshades-react",
+  "description": "Nightshades client written in React and Redux",
+  "main": "app/index.js",
+  "authors": [
+    "Emily Horsman"
+  ],
+  "homepage": "https://github.com/emilyhorsman/nightshades-react",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "material-color": "~2.2.0"
+  }
+}
