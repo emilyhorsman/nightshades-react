@@ -4,7 +4,7 @@ import Moment from 'moment'
 
 import './styles.scss'
 
-const formatExpiry = (time) => time.format('hh:mm:ss A')
+const formatExpiry = (time) => time.format('hh:mm A')
 
 function UnitForm({
   expiryTime,
@@ -20,14 +20,16 @@ function UnitForm({
   return (
     <div className="new-timer">
       <form onSubmit={handleSubmit}>
-        <div className="form-group timer-length">
-          <label className="addon" htmlFor="time">Length</label>
-          <input type="number" id="time" value={delta / 60} onChange={handleTimeChange} />
-          <span className="addon">ends at {formatExpiry(expiryTime)}</span>
-        </div>
+        <div className="parent">
+          <label htmlFor="timeSlider" className="sr-only">Length Slider</label>
+          <input type="range" id="timeSlider" value={delta / 60} onChange={handleTimeChange} min={2} max={120} /><br />
 
-        <label htmlFor="timeSlider" className="sr-only">Time Slider</label>
-        <input type="range" id="timeSlider" value={delta / 60} onChange={handleTimeChange} min={2} max={120} /><br />
+          <div className="form-group timer-length">
+            <label className="addon" htmlFor="time">Length</label>
+            <input type="number" id="time" value={delta / 60} onChange={handleTimeChange} />
+            <span className="addon">minutes (ending at {formatExpiry(expiryTime)})</span>
+          </div>
+        </div>
 
         <label htmlFor="description">Description</label>
         <textarea
