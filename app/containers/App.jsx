@@ -9,6 +9,7 @@ export default class App extends Component {
     return(
       <main>
         <ErrorsListContainer />
+        <h1>nightshades</h1>
         <UserContainer />
       </main>
     )

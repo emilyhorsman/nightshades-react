@@ -26,7 +26,7 @@ class UnitsListContainer extends Component {
 
     let lastUnitId = 0
     return (
-      <div>
+      <div className="units-list-container">
         <button
           className="-red"
           disabled={!canCancel}

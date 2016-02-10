@@ -18,17 +18,13 @@ function UnitForm({
   tags
 }) {
   return (
-    <div className="new-timer">
+    <div className="unit-form">
       <form onSubmit={handleSubmit}>
-        <div className="parent">
-          <label htmlFor="timeSlider" className="sr-only">Length Slider</label>
-          <input type="range" id="timeSlider" value={delta / 60} onChange={handleTimeChange} min={2} max={120} /><br />
-
-          <div className="form-group timer-length">
-            <label className="addon" htmlFor="time">Length</label>
-            <input type="number" id="time" value={delta / 60} onChange={handleTimeChange} />
-            <span className="addon">minutes (ending at {formatExpiry(expiryTime)})</span>
-          </div>
+        <label className="sr-only" htmlFor="timeSlider">Length</label>
+        <label htmlFor="time">Length (minutes)</label>
+        <div className="number-range-group">
+          <input type="number" id="time" value={delta / 60} onChange={handleTimeChange} />
+          <input type="range" id="timeSlider" value={delta / 60} onChange={handleTimeChange} min={2} max={120} />
         </div>
 
         <label htmlFor="description">Description</label>

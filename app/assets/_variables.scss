@@ -9,18 +9,20 @@ $primary: $clr-indigo;
 $primary-hue-a: $clr-indigo-300;
 $primary-hue-b: $clr-indigo-500;
 
-$primary: $clr-deep-purple-600;
-$primary-hue-a: $clr-deep-purple-400;
-$primary-hue-b: $clr-deep-purple-700;
+$primary: $clr-light-blue-600;
+$primary-hue-a: $clr-light-blue-400;
+$primary-hue-b: $clr-light-blue-700;
 
-$primary-action: $primary-hue-a;
+$primary-action: $primary-hue-b;
 
+$primary-action: $clr-green;
 
 // One accent from the secondary palette
 $accent: $clr-pink-a200;
 $accent-hue-a: $clr-pink-a100;
 
 /** Tags **/
-$tag-bg: $clr-pink-50;
+$tag-bg: $clr-pink-900;
+$tag-bg: #111;
 $tag-height: 35px;
 $tag-sub-height: $tag-height * 0.75;

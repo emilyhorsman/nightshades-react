@@ -7,7 +7,7 @@ footer, header, hgroup, menu, nav, section {
 
 html {
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 *, *:before, *:after {
@@ -17,78 +17,64 @@ html {
 body {
   margin: 0;
   padding: 20px;
-  border-top: 6px solid $primary;
-  color: $primary-fg;
+  background-color: #231E22;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-@mixin button-colour($base, $fg: white) {
-  background-color: $base;
-  border-color: darken($base, 15%);
-  color: $fg;
-  box-shadow: 0 0 1px transparentize($base, 0.4);
-  border-radius: 1px;
+.units-list-container { display: none; }
+.timer-length { display: none !important; }
 
-  &:hover {
-    background-color: darken($base, 15%);
-    color: $fg;
-  }
-
-  &:focus {
-    outline: 1px solid darken($base, 15%);
-  }
-
-  &:focus:active {
-    outline: none;
-  }
-
-  &[disabled] {
-    border-color: white;
-    color: grey;
-    background-color: white;
-  }
+label {
+  margin: 5px 0;
+  letter-spacing: 1px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-$w: 5px;
+
+main > h1 {
+  font-weight: 100;
+  letter-spacing: 1px;
+  font-size: 24px;
+  margin: 0;
+}
+
+
+
+$button-color: $clr-cyan-700;
 button {
   position: relative;
-  border: 0;
-  border-bottom-width: $w;
-  border-bottom-style: solid;
-  padding: 15px 25px 15px - $w;
-  line-height: 16px;
-  height: 46px;
-  font-size: 16px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 1px rgba(0,0,0,0.2);
-  margin: 10px 0;
+  background-color: transparent;
+  font-size: 18px;
+  font-weight: 100;
+  padding: 5px 10px;
+  transition: all 0.25s ease;
+
+  border: 1px solid $button-color;
+  color: $button-color;
+  border-radius: 3px;
 
   &:hover {
+    background-color: $button-color;
+    color: white;
     cursor: pointer;
   }
-
-  &:active {
-    transform: translateY(4px);
-    border-bottom-width: 1px;
-  }
-
-  &[disabled] {
-    cursor: auto;
-  }
-
-  @include button-colour($primary-action);
-
-  &.-red { @include button-colour($clr-red-400); }
 }
 
 textarea,
 input {
+  display: block;
   font-family: inherit;
   border-radius: 5px;
   padding: 5px 10px;
   font-size: 1em;
-  border: 1px solid #dfdfdf;
+  border: 0;
+  background-color: rgba(0,0,0,0.26);
+  color: rgba(255,255,255,0.87);
+}
+
+::-webkit-input-placeholder {
+  color: rgba(255,255,255,0.4);
 }
 
 input {
@@ -108,7 +94,6 @@ input {
 
 .react-tagsinput {
   margin: 10px 0;
-  padding: 5px 8px;
   width: 400px;
   display: inline-block;
 
@@ -139,7 +124,7 @@ a.react-tagsinput-remove {
   &:after {
     content: '×';
     text-align: center;
-    background-color: darken($tag-bg, 5%);
+    background-color: lighten($tag-bg, 5%);
     margin: ($tag-height - $tag-sub-height) / 2;
     height: $tag-sub-height;
     width: $tag-sub-height;
