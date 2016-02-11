@@ -1,0 +1,16 @@
+@import '../../assets/variables';
+
+.header {
+  position: relative;
+  background-color: $header-bg;
+  color: $header-fg;
+  padding: 0 $padding;
+}
+
+.header h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: 24px;
+  letter-spacing: 1px;
+  line-height: $header-height;
+}

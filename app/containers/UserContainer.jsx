@@ -6,9 +6,11 @@ import * as actions from '../actions/User'
 import { api } from '../actions'
 import NewUnitContainer from './NewUnitContainer'
 import UnitsListContainer from './UnitsListContainer'
+import CurrentUnitContainer from './CurrentUnitContainer'
 import Loader from '../components/Loader'
 import User from '../components/User'
 import SignIn from '../components/SignIn'
+import Header from '../components/Header'
 
 class UserContainer extends Component {
   constructor(props) {
@@ -52,13 +54,21 @@ class UserContainer extends Component {
     if (authenticated) {
       return (
         <div>
-          <User
-            name={name}
-            onLogout={this.onLogout}
-          />
+          <Header>
+            <User
+              name={name}
+              onLogout={this.onLogout}
+            />
+          </Header>
 
-          <NewUnitContainer />
-          <UnitsListContainer />
+          <aside>
+            <NewUnitContainer />
+            <CurrentUnitContainer />
+          </aside>
+
+          <main>
+            <UnitsListContainer />
+          </main>
         </div>
       )
     }

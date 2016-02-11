@@ -1,0 +1,48 @@
+.react-tagsinput-input {
+  margin-bottom: 10px;
+}
+
+$tag-height: 35px;
+$tag-sub-height: $tag-height * 0.75;
+.react-tagsinput-tag {
+  background-color: $tag-bg;
+  display: inline-block;
+  padding-left: 20px;
+  margin: 3px;
+  line-height: $tag-height;
+  border-radius: $tag-height / 2;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+}
+
+// We need to ensure the tap target of the remove button remains large
+a.react-tagsinput-remove {
+  height: 100%;
+  width: $tag-height;
+  padding-left: 6px;
+  box-sizing: content-box;
+  display: inline-block;
+
+  &:after {
+    content: '×';
+    text-align: center;
+    background-color: darken($tag-bg, 5%);
+    margin: ($tag-height - $tag-sub-height) / 2;
+    height: $tag-sub-height;
+    width: $tag-sub-height;
+    line-height: $tag-sub-height;
+    display: inline-block;
+    border-radius: 50%;
+    transition: all 0.25s ease;
+  }
+
+  &:hover {
+    cursor: pointer;
+    &:after {
+      background-color: darken($tag-bg, 10%);
+      transform: scale(1.05);
+    }
+  }
+}

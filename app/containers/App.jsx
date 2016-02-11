@@ -7,10 +7,10 @@ import '../assets/styles.scss'
 export default class App extends Component {
   render() {
     return(
-      <main>
+      <div>
         <ErrorsListContainer />
         <UserContainer />
-      </main>
+      </div>
     )
   }
 }

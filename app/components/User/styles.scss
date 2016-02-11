@@ -1,0 +1,21 @@
+@import '../../assets/variables';
+
+.user {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: $padding;
+
+  > span {
+    line-height: $header-height;
+  }
+
+  > span,
+  > button {
+    display: inline-block;
+  }
+
+  button {
+    margin-left: 20px;
+  }
+}

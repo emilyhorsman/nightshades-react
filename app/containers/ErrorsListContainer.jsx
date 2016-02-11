@@ -14,7 +14,7 @@ class ErrorsListContainer extends Component {
   render() {
     const { errors } = this.props
     return (
-      <ul>
+      <ul className="errors-list-container">
         {errors.map(error =>
           <Error
             key={error.id}

@@ -1,4 +1,24 @@
 @import 'vendor/material-color/material-color';
 
+/** Global **/
+$padding: 30px;
+
+/** Colours **/
+$white: rgba(255, 255, 255, 0.87);
+$secondary-white: rgba(255, 255, 255, 0.8);
+$violet: #231e22;
+
+/** Buttons **/
+$light-button-color: $clr-cyan-700;
+
+/** Header **/
+$header-height: 60px;
+$header-bg: $violet;
+$header-fg: $white;
+
+/** Action Area **/
+$aside-bg: lighten($violet, 4%);
+$aside-fg: $white;
+
 /** Tags **/
-$tag-bg: $clr-pink-50;
+$tag-bg: $violet;
