@@ -1,3 +1,8 @@
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 .react-tagsinput-input {
   margin-bottom: 10px;
 }
@@ -11,6 +16,8 @@ $tag-sub-height: $tag-height * 0.75;
   margin: 3px;
   line-height: $tag-height;
   border-radius: $tag-height / 2;
+  animation: fade-in 0.25s ease;
+
 
   &:first-of-type {
     margin-left: 0;
@@ -36,13 +43,16 @@ a.react-tagsinput-remove {
     display: inline-block;
     border-radius: 50%;
     transition: all 0.25s ease;
+    transform-origin: $tag-sub-height / 2 $tag-sub-height / 2;
   }
 
   &:hover {
     cursor: pointer;
     &:after {
       background-color: darken($tag-bg, 10%);
-      transform: scale(1.05);
+      transform: scale(1.1) rotate(90deg);
+      color: $clr-red;
     }
   }
 }
+
