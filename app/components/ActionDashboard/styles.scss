@@ -6,8 +6,10 @@
   color: $action-dashboard-fg;
   padding: $padding;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
 
-  > section {
+@media screen and (max-width: $small-max) {
+  .action-dashboard > section {
     padding: $padding / 3 0;
     margin: $padding / 3 0;
   }
