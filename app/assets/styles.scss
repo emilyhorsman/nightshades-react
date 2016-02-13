@@ -12,7 +12,12 @@
 }
 
 button {
-  @include flat-button($light-button-color);
+  @include flat-button((
+    base:  $light-button-color,
+    disabled: $disabled-color,
+    green: $action-button-color,
+    red:   $danger-button-color
+  ));
 }
 
 .sr-only {

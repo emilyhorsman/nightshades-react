@@ -76,7 +76,7 @@ function UnitForm({
           </div>
         </div>
 
-        <button disabled={disabled}>Start Timer</button>
+        <button className="-green" disabled={disabled}>Start Timer</button>
       </form>
     </div>
   )
