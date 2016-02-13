@@ -26,48 +26,57 @@ function UnitForm({
   handleDescriptionChange,
   tags
 }) {
+  const tagInputProps = {
+    id: 'tags'
+  }
+
   return (
     <div className="unit-form">
-      <form className="table-layout" onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col">
-            <label htmlFor="tags">Tags</label>
-            <TagsInput
-              addKeys={[9, 13, 188]}
-              value={tags}
-              onChange={handleTagsChange}
-              renderLayout={tagsInputRenderLayout}
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="tags">Tags</label>
+        <TagsInput
+          addKeys={[9, 13, 188]}
+          value={tags}
+          onChange={handleTagsChange}
+          renderLayout={tagsInputRenderLayout}
+          inputProps={tagInputProps}
+        />
+
+        <label htmlFor="description">Description</label>
+        <textarea
+          value={description}
+          onChange={handleDescriptionChange}
+          name="description"
+          id="description"
+          placeholder="What are we doing this time?"
+          rows="2"
+        />
+
+        <label htmlFor="time">Length (minutes)</label>
+        <label htmlFor="timeSlider" className="sr-only">Time Slider</label>
+        <div className="group">
+          <div className="-left">
+            <input
+              type="number"
+              id="time"
+              value={delta / 60}
+              onChange={handleTimeChange}
             />
           </div>
 
-          <div className="col -fixed-width">
-            <label htmlFor="description">Description</label>
-            <textarea
-              value={description}
-              onChange={handleDescriptionChange}
-              name="description"
-              id="description"
-              placeholder="What are we doing this time?"
-              rows="2"
+          <div className="-right">
+            <input
+              type="range"
+              id="timeSlider"
+              value={delta / 60}
+              onChange={handleTimeChange}
+              min={2}
+              max={120}
             />
-
-            <label htmlFor="time">Length (minutes)</label>
-            <label htmlFor="timeSlider" className="sr-only">Time Slider</label>
-            <div className="group">
-              <input type="number" id="time" value={delta / 60} onChange={handleTimeChange} />
-              <input
-                type="range"
-                id="timeSlider"
-                value={delta / 60}
-                onChange={handleTimeChange}
-                min={2}
-                max={120}
-              />
-            </div>
-
-            <button disabled={disabled}>Start Timer</button>
           </div>
         </div>
+
+        <button disabled={disabled}>Start Timer</button>
       </form>
     </div>
   )

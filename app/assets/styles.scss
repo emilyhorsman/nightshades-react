@@ -1,63 +1,20 @@
-@import "variables";
-@import "reset";
-@import "utilities";
-@import "forms";
-@import "tags";
-@import "buttons";
+@import 'variables';
+@import 'vendor/shades/global';
+@import 'vendor/shades/shades';
+@import 'forms';
+@import 'tags';
 
-html {
-  font-family: 'Open Sans', sans-serif;
-}
+@include reset('Open Sans', sans-serif);
 
 .errors-list-container {
   margin: 0;
   padding: 0;
 }
 
-.group {
-  display: inline-block;
-  vertical-align: middle;
-
-  > input[type=range],
-  > input[type=number] {
-    display: inline-block;
-    margin-right: $padding;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
+button {
+  @include flat-button($light-button-color);
 }
 
-@media (min-width: 700px) {
-  .table-layout {
-    display: table;
-    width: 100%;
-
-    .row {
-      display: table-row;
-    }
-
-    .col {
-      display: table-cell;
-
-      padding-right: $padding;
-      &:last-child {
-        padding-right: 0;
-      }
-    }
-  }
-}
-
-aside:after { @extend .clearfix; }
-aside {
-  background: $aside-bg;
-  color: $aside-fg;
-  padding: $padding;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-}
-
-.current-unit-container {
-  float: left;
-  margin-top: $padding;
+.sr-only {
+  @include screenreader-text;
 }

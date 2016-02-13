@@ -22,7 +22,8 @@ class CurrentUnitContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    canCancel: state.NewUnitDomain.disabled
+    canCancel: state.NewUnitDomain.disabled,
+    units: state.UnitsDomain.units
   }
 }
 

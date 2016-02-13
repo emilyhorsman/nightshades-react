@@ -4,20 +4,25 @@ import { connect } from 'react-redux'
 
 import * as actions from '../actions/User'
 import { api } from '../actions'
+
+import CurrentUnitContainer from './CurrentUnitContainer'
+import HistoryContainer from './HistoryContainer'
 import NewUnitContainer from './NewUnitContainer'
 import UnitsListContainer from './UnitsListContainer'
-import CurrentUnitContainer from './CurrentUnitContainer'
-import Loader from '../components/Loader'
-import User from '../components/User'
-import SignIn from '../components/SignIn'
+
+import ActionDashboard from '../components/ActionDashboard'
 import Header from '../components/Header'
+import Loader from '../components/Loader'
+import SignIn from '../components/SignIn'
+import User from '../components/User'
 
 class UserContainer extends Component {
   constructor(props) {
     super(props)
 
     this.onLogout = props.actions.logout.bind(this)
-    this.signInWith = (provider) => this.signIn.bind(this, provider)
+    this.signInWithTwitter = this.signIn.bind(this, 'twitter')
+    this.signInWithFacebook = this.signIn.bind(this, 'facebook')
   }
 
   componentDidMount() {
@@ -61,12 +66,13 @@ class UserContainer extends Component {
             />
           </Header>
 
-          <aside>
-            <NewUnitContainer />
-            <CurrentUnitContainer />
-          </aside>
-
           <main>
+            <ActionDashboard>
+              <HistoryContainer className="-desktop" />
+              <CurrentUnitContainer />
+              <NewUnitContainer />
+            </ActionDashboard>
+
             <UnitsListContainer />
           </main>
         </div>
@@ -75,8 +81,8 @@ class UserContainer extends Component {
 
     return (
       <SignIn
-        facebook={this.signInWith('facebook')}
-        twitter={this.signInWith('twitter')}
+        facebook={this.signInWithFacebook}
+        twitter={this.signInWithTwitter}
       />
     )
   }

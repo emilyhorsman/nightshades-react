@@ -47,18 +47,20 @@ class NewUnitContainer extends Component {
     const { loading } = this.props
 
     if (loading) {
-      return <Loader active={loading} />
+      return <div className="new-unit-container"><Loader active={loading} /></div>
     }
 
     return (
-      <UnitForm
-        disabled={this.props.disabled}
-        handleDescriptionChange={this.onHandleDescriptionChange}
-        handleSubmit={this.onHandleSubmit}
-        handleTagsChange={this.onHandleTagsChange}
-        handleTimeChange={this.onHandleTimeChange}
-        {...this.props.unit}
-      />
+      <div className="new-unit-container">
+        <UnitForm
+          disabled={this.props.disabled}
+          handleDescriptionChange={this.onHandleDescriptionChange}
+          handleSubmit={this.onHandleSubmit}
+          handleTagsChange={this.onHandleTagsChange}
+          handleTimeChange={this.onHandleTimeChange}
+          {...this.props.unit}
+        />
+      </div>
     )
   }
 }

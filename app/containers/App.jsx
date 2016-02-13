@@ -8,7 +8,10 @@ export default class App extends Component {
   render() {
     return(
       <div>
-        <ErrorsListContainer />
+        <section>
+          <ErrorsListContainer />
+        </section>
+
         <UserContainer />
       </div>
     )

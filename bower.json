@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "material-color": "~2.2.0"
+    "material-color": "~2.2.0",
+    "shades": "git://github.com/emilyhorsman/shades.git"
   }
 }

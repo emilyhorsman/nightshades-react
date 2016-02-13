@@ -1,24 +1,31 @@
 @import 'vendor/material-color/material-color';
 
-/** Global **/
+// Global
 $padding: 30px;
 
-/** Colours **/
+// Colours
 $white: rgba(255, 255, 255, 0.87);
 $secondary-white: rgba(255, 255, 255, 0.8);
+$dark: rgba(0, 0, 0, 0.26);
 $violet: #231e22;
 
-/** Buttons **/
+// Breakpoints
+$small-max: 749px;
+$medium-min: 750px;
+$medium-max: 1023px;
+$large-min: 1024px;
+
+// Buttons
 $light-button-color: $clr-cyan-700;
 
-/** Header **/
+// Header
 $header-height: 60px;
 $header-bg: $violet;
 $header-fg: $white;
 
-/** Action Area **/
-$aside-bg: lighten($violet, 4%);
-$aside-fg: $white;
+// Action Dashboard
+$action-dashboard-bg: lighten($violet, 4%);
+$action-dashboard-fg: $white;
 
-/** Tags **/
+// Tags
 $tag-bg: $violet;

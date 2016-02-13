@@ -1,0 +1,17 @@
+---
+scss_filters: 'app/**/*.scss'
+
+exclude:
+  - 'app/assets/vendor/**'
+  - 'node_modules/**'
+
+linters:
+
+  LeadingZero:
+    style: include_zero
+
+  PropertySortOrder:
+    enabled: false
+
+  QualifyingElement:
+    enabled: false

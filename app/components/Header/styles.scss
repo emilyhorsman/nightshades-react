@@ -5,6 +5,7 @@
   background-color: $header-bg;
   color: $header-fg;
   padding: 0 $padding;
+  height: $header-height;
 }
 
 .header h1 {
@@ -13,4 +14,10 @@
   font-size: 24px;
   letter-spacing: 1px;
   line-height: $header-height;
+}
+
+@media screen and (max-width: $small-max) {
+  h1 {
+    display: none;
+  }
 }

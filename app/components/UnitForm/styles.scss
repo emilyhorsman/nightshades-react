@@ -1,13 +1,14 @@
+@import '../../assets/vendor/shades/shades';
 @import '../../assets/variables';
-@import '../../assets/utilities';
 
 .unit-form form {
   width: 100%;
+  max-width: 600px;
 }
 
 .unit-form form input,
 .unit-form form textarea {
-  background-color: rgba(0, 0, 0, 0.26);
+  background-color: $dark;
   color: $white;
   border: 0;
   width: 100%;
@@ -18,12 +19,22 @@
   margin-bottom: 10px;
 }
 
-.unit-form input[type=number] {
-  width: 70px;
-}
+.unit-form .group {
+  display: table;
+  width: 100%;
 
-.unit-form input[type=range] {
-  width: 200px;
+  .-left,
+  .-right {
+    display: table-cell;
+  }
+
+  .-left {
+    width: 70px;
+  }
+
+  .-right {
+    padding-left: $padding / 2;
+  }
 }
 
 .unit-form label {
@@ -35,13 +46,4 @@
 .unit-form button {
   display: block;
   margin-top: 10px;
-}
-
-@media (min-width: 700px) {
-  .unit-form form {
-    max-width: 900px;
-    float: right;
-  }
-
-  .unit-form .-fixed-width { width: 400px; }
 }
