@@ -17,7 +17,7 @@ class TimerContainer extends Component {
     super(props)
 
     this.state = {
-      duration: props.unit.expiryTime.diff(props.unit.startTime),
+      duration: props.model.expiryTime.diff(props.model.startTime),
       interval: null,
       path: ''
     }
@@ -35,10 +35,10 @@ class TimerContainer extends Component {
   }
 
   tick() {
-    const { radius, unit } = this.props
+    const { radius, model } = this.props
     const { duration } = this.state
 
-    const delta = unit.expiryTime.diff(Moment())
+    const delta = model.expiryTime.diff(Moment())
 
     const angle = (1 - (delta / duration)) * Math.PI * 2
     const x = Math.sin(angle) * radius
@@ -58,7 +58,7 @@ class TimerContainer extends Component {
   }
 
   render() {
-    const { delta } = this.props.unit
+    const { delta } = this.props.meta
 
     const duration = Moment.duration(delta)
     const minutes  = fmt(duration.minutes())

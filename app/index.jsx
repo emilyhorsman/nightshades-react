@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import createLogger from 'redux-logger'
 
-import { fetchJSONMiddleware } from './middleware'
+import { fetchJSONMiddleware, UnitMiddleware } from './middleware'
 import App from './containers/App'
 import root from './reducers'
 
@@ -16,6 +16,7 @@ const devToolsWrapper  = window.devToolsExtension ? window.devToolsExtension() :
 const createFinalStore = compose(
   applyMiddleware(
     fetchJSONMiddleware,
+    UnitMiddleware,
     loggerMiddleware
   ),
 

@@ -1,5 +1,12 @@
 import Moment from 'moment'
-import { isExpired } from './helpers'
+import { isOngoing } from './helpers'
+
+function timeRange(delta) {
+  return {
+    startTime: Moment(),
+    expiryTime: Moment().add(delta, 'seconds')
+  }
+}
 
 const initialState = {
   fetching: false,
@@ -7,9 +14,8 @@ const initialState = {
   unit: {
     delta: 1500,
     description: '',
-    startTime: Moment(),
-    expiryTime: Moment().add(1500, 'seconds'),
-    tags: []
+    tags: [],
+    ...timeRange(1500)
   }
 }
 
@@ -28,8 +34,7 @@ const NewUnitReducer = (state = initialState, action) => {
         ...state,
         unit: {
           ...state.unit,
-          startTime: Moment(),
-          expiryTime: Moment().add(state.unit.delta, 'seconds')
+          ...timeRange(state.unit.delta)
         }
       }
     case 'NEW_UNIT_FETCHING':
@@ -61,7 +66,7 @@ const NewUnitReducer = (state = initialState, action) => {
       }
     case 'UNITS_SUCCESS':
       // Disable new unit submission if there is a currently ongoing unit.
-      if (!action.data.find(unit => !isExpired(unit.attributes))) {
+      if (!action.data.find(isOngoing)) {
         return state
       }
 

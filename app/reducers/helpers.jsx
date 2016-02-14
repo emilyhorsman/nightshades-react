@@ -1,7 +1,11 @@
 import Moment from 'moment'
 
-export function isExpired({ expiry_time, expiry_threshold_seconds }) {
-  const t = Moment(expiry_time)
-  t.add(expiry_threshold_seconds, 'seconds')
-  return Moment() > t
+export function isOngoing({ meta, model }) {
+  if (model.completed) {
+    return false
+  }
+
+  const t = model.expiryTime.clone()
+  t.add(meta.expiryThreshold, 'seconds')
+  return Moment() < t
 }

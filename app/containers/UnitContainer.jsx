@@ -1,24 +1,34 @@
 import React, { Component } from 'react'
 import Unit from '../components/Unit'
+import { isOngoing } from '../reducers/helpers'
 
 class UnitContainer extends Component {
   componentWillReceiveProps(nextProps) {
     // Let's check if it's time to tell the server that this unit is complete.
-    if (nextProps.fetching || !nextProps.hasOwnProperty('delta')) {
+    if (nextProps.fetching) {
       return
     }
 
-    if (nextProps.completed) {
+    if (!isOngoing(nextProps)) {
       return
     }
 
-    if (nextProps.delta <= -100) {
+    if (nextProps.meta.delta <= -100) {
       this.props.markComplete()
     }
   }
 
   render() {
-    return <li className="unit"><Unit {...this.props} /></li>
+    const { meta, model } = this.props
+    return (
+      <li className="unit">
+        <Unit
+          {...model}
+          {...meta}
+          expired={!isOngoing(this.props)}
+        />
+      </li>
+    )
   }
 }
 

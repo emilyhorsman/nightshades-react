@@ -3,16 +3,16 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as actions from '../actions/Units'
+import { isOngoing } from '../reducers/helpers'
 import TimerContainer from './TimerContainer'
 
 class CurrentUnitContainer extends Component {
   render() {
-    const { canCancel, actions, units } = this.props
-    const unit = units.filter(unit => unit.ongoing)
+    const { actions, unit } = this.props
 
     let timer = null
     if (unit.length > 0) {
-      timer = <TimerContainer unit={unit[0]} />
+      timer = <TimerContainer {...unit[0]} />
     }
 
     return (
@@ -20,7 +20,7 @@ class CurrentUnitContainer extends Component {
         {timer}
         <button
           className="-red"
-          disabled={!canCancel}
+          disabled={unit.length === 0}
           onClick={actions.cancelOngoing}
         >Cancel Timer</button>
       </div>
@@ -30,8 +30,7 @@ class CurrentUnitContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    canCancel: state.NewUnitDomain.disabled,
-    units: state.UnitsDomain.units
+    unit: state.UnitsDomain.units.filter(isOngoing)
   }
 }
 
