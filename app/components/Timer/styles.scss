@@ -1,0 +1,44 @@
+@import '../../assets/variables';
+
+$height: 300px;
+
+.timer {
+  position: relative;
+  text-align: center;
+  width: $height;
+  height: $height;
+  margin: 0 auto;
+  margin-bottom: $padding / 2;
+
+  svg,
+  time,
+  .label {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .label {
+    font-size: 18px;
+    font-weight: 300;
+    color: $tertiary-white;
+    top: 30%;
+    animation: fade-in 0.25s ease;
+  }
+
+  time,
+  .label {
+    // Time and label should be shown above the SVG circle which is set to
+    // an opaque background colour matching the action dashboard background.
+    z-index: 2;
+  }
+
+  time {
+    line-height: $height;
+    font-size: 60px;
+    color: $white;
+  }
+}

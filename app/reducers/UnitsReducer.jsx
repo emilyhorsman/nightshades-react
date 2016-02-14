@@ -25,6 +25,7 @@ const UnitsReducer = (state = initialState, action) => {
             description: unit.attributes.description,
             completed: unit.attributes.completed,
             expired: isExpired(unit.attributes),
+            ongoing: !unit.attributes.completed && !isExpired(unit.attributes),
             startTime: Moment(unit.attributes.start_time),
             expiryTime: expiryTime
           }
@@ -71,7 +72,8 @@ const UnitsReducer = (state = initialState, action) => {
 
           return {
             ...unit,
-            completed: action.data.attributes.completed
+            completed: action.data.attributes.completed,
+            ongoing: false
           }
         })
       }
@@ -79,12 +81,14 @@ const UnitsReducer = (state = initialState, action) => {
       const expiryTime = Moment(action.data.attributes.expiry_time)
       let unit = {
         fetching: false,
+        ongoing: true,
         uuid: action.data.id,
         description: action.data.attributes.description,
         expired: isExpired(action.data.attributes),
         completed: action.data.attributes.completed,
         startTime: Moment(action.data.attributes.start_time),
         expiryTime: expiryTime,
+        expiryThreshold: action.data.attributes.expiry_threshold_seconds,
         delta: expiryTime.diff(Moment())
       }
 

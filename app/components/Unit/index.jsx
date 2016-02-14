@@ -60,7 +60,7 @@ function Unit({ description, completed, expired, delta, startTime, expiryTime, t
       display = `${duration.hours()}h ${display}`
     }
 
-    statusText = `${status} with ${display}`
+    statusText = `${status} with ${display} remaining`
   }
 
 

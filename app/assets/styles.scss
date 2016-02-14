@@ -11,6 +11,11 @@
   padding: 0;
 }
 
+.history-container,
+.current-unit-container {
+  text-align: center;
+}
+
 button {
   @include flat-button((
     base:  $light-button-color,
