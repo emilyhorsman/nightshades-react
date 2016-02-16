@@ -5,14 +5,17 @@ import { connect } from 'react-redux'
 import * as actions from '../actions/Units'
 import { isOngoing } from '../reducers/helpers'
 import TimerContainer from './TimerContainer'
+import Timer from '../components/Timer'
 
 class CurrentUnitContainer extends Component {
   render() {
-    const { actions, unit } = this.props
+    const { actions, currentUnit, newUnit } = this.props
 
-    let timer = null
-    if (unit.length > 0) {
-      timer = <TimerContainer {...unit[0]} />
+    let timer
+    if (currentUnit.length > 0) {
+      timer = <TimerContainer {...currentUnit[0]} />
+    } else {
+      timer = <Timer delta={newUnit.meta.delta * 1000} ticking={false} />
     }
 
     return (
@@ -20,7 +23,7 @@ class CurrentUnitContainer extends Component {
         {timer}
         <button
           className="-red"
-          disabled={unit.length === 0}
+          disabled={currentUnit.length === 0}
           onClick={actions.cancelOngoing}
         >Cancel Timer</button>
       </div>
@@ -30,7 +33,8 @@ class CurrentUnitContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    unit: state.UnitsDomain.units.filter(isOngoing)
+    currentUnit: state.UnitsDomain.units.filter(isOngoing),
+    newUnit: state.NewUnitDomain.unit
   }
 }
 

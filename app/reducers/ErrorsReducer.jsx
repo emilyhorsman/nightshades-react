@@ -7,7 +7,7 @@ const ErrorsReducer = (state = [], action) => {
     case 'TICK':
       // Only display errors for 15 seconds.
       return state.filter(error => {
-        return Moment(error.receivedAt + 15000).isAfter()
+        return error.receivedAt.add(15, 'seconds').isAfter()
       })
     case 'DISMISS_ERROR':
       return state.filter(error => error.id !== action.id)

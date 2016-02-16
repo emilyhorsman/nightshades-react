@@ -12,10 +12,15 @@ const initialState = {
   fetching: false,
   disabled: false,
   unit: {
-    delta: 1500,
-    description: '',
-    tags: [],
-    ...timeRange(1500)
+    model: {
+      description: '',
+      tags: [],
+      ...timeRange(1500)
+    },
+
+    meta: {
+      delta: 1500,
+    }
   }
 }
 
@@ -26,7 +31,14 @@ const NewUnitReducer = (state = initialState, action) => {
         ...state,
         unit: {
           ...state.unit,
-          ...action.attributes
+          model: {
+            ...state.unit.model,
+            ...action.attributes.model
+          },
+          meta: {
+            ...state.unit.meta,
+            ...action.attributes.meta
+          }
         }
       }
     case 'TICK':
@@ -34,7 +46,10 @@ const NewUnitReducer = (state = initialState, action) => {
         ...state,
         unit: {
           ...state.unit,
-          ...timeRange(state.unit.delta)
+          model: {
+            ...state.unit.model,
+            ...timeRange(state.unit.meta.delta)
+          }
         }
       }
     case 'NEW_UNIT_FETCHING':
@@ -55,7 +70,10 @@ const NewUnitReducer = (state = initialState, action) => {
         fetching: false,
         unit: {
           ...state.unit,
-          description: ''
+          model: {
+            ...state.unit.model,
+            description: ''
+          }
         }
       }
     case 'CANCEL_ONGOING_SUCCESS':

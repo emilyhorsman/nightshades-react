@@ -40,10 +40,11 @@ const fetchJSONMiddleware = ({ dispatch }) => (next) => (action) => {  // eslint
       })
     })
     .then(payload => {
+      const date = (payload.meta && payload.meta.date) ? Moment(payload.meta.date) : Moment()
       next({
         type: type + '_SUCCESS',
         data: payload.data,
-        receivedAt: Date.now(),
+        receivedAt: date,
         ...args
       })
     })
@@ -51,21 +52,21 @@ const fetchJSONMiddleware = ({ dispatch }) => (next) => (action) => {  // eslint
       next({
         type: type + '_ERROR',
         message: e,
-        receivedAt: Date.now(),
+        receivedAt: Moment(),
         ...args
       })
     })
 }
 
-function transformData(data, func) {
-  if (Array.isArray(data)) {
-    return data.map(func)
+function transformData(action, func) {
+  if (Array.isArray(action.data)) {
+    return action.data.map(func.bind(null, action.receivedAt))
   }
 
-  return func(data)
+  return func(action.receivedAt, action.data)
 }
 
-function transformUnitData(data) {
+function transformUnitData(date, data) {
   if (data.type !== 'unit') {
     return data
   }
@@ -89,7 +90,9 @@ function transformUnitData(data) {
       tags: tags || []
     },
     meta: {
-      delta: expiryTime.diff(Moment()),
+      fetchedAtClient: Moment(),
+      fetchedAt: date,
+      delta: expiryTime.diff(date),
       expiryThreshold: expiry_threshold_seconds
     }
   }
@@ -106,7 +109,7 @@ const UnitMiddleware = ({ dispatch }) => (next) => (action) => {  // eslint-disa
 
   next({
     ...action,
-    data: transformData(action.data, transformUnitData)
+    data: transformData(action, transformUnitData)
   })
 }
 

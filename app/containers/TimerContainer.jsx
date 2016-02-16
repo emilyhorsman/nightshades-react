@@ -4,14 +4,6 @@ import Moment from 'moment'
 
 import Timer from '../components/Timer'
 
-function fmt(num) {
-  if (num <= 9) {
-    return `0${num}`
-  } else {
-    return num
-  }
-}
-
 class TimerContainer extends Component {
   constructor(props) {
     super(props)
@@ -26,7 +18,8 @@ class TimerContainer extends Component {
   componentDidMount() {
     this.setState({
       ...this.state,
-      interval: setInterval(this.tick.bind(this), 30)
+      delta: this.props.meta.delta,
+      interval: setInterval(this.tick.bind(this), 100)
     })
   }
 
@@ -36,11 +29,16 @@ class TimerContainer extends Component {
 
   tick() {
     const { radius, model } = this.props
-    const { duration } = this.state
+    const { delta, duration } = this.state
 
-    const delta = model.expiryTime.diff(Moment())
-
-    const angle = (1 - (delta / duration)) * Math.PI * 2
+    // Ensure α ≥ 0.001 to prevent initial flickering.
+    const angle = Math.min(
+      Math.max(
+        (1 - (delta / duration)) * Math.PI * 2,
+        0.001
+      ),
+      Math.PI * 2 - 0.001
+    )
     const x = Math.sin(angle) * radius
     const y = Math.cos(angle) * -radius
 
@@ -53,28 +51,18 @@ class TimerContainer extends Component {
 
     this.setState({
       ...this.state,
+      delta: this.state.delta - 100,
       path: path
     })
   }
 
   render() {
-    const { delta } = this.props.meta
-
-    const duration = Moment.duration(delta)
-    const minutes  = fmt(duration.minutes())
-    const seconds  = fmt(duration.seconds())
-
-    let display = `${minutes}:${seconds}`
-    if (duration.hours() > 0) {
-      display = `0${duration.hours()}:${display}`
-    }
-
     return (
       <div className="timer-container">
         <Timer
-          display={display}
+          delta={this.props.meta.delta}
           path={this.state.path}
-          radius={50}
+          ticking={true}
         />
       </div>
     )

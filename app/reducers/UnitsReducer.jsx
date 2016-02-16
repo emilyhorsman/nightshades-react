@@ -81,7 +81,7 @@ const UnitsReducer = (state = initialState, action) => {
             ...unit,
             meta: {
               ...unit.meta,
-              delta: unit.model.expiryTime.diff(Moment())
+              delta: unit.meta.delta - 1000
             }
           }
         })

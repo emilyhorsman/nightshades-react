@@ -12,9 +12,9 @@ export function newUnit(attributes) {
     data: {
       type: 'unit',
       attributes: {
-        description: attributes.description,
-        delta: attributes.delta,
-        tags: attributes.tags.join(',')
+        description: attributes.model.description,
+        delta: attributes.meta.delta,
+        tags: attributes.model.tags.join(',')
       }
     }
   })], { type: 'application/json' })

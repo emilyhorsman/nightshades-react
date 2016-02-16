@@ -25,21 +25,21 @@ class NewUnitContainer extends Component {
 
   handleDescriptionChange(event) {
     this.props.actions.change({
-      description: event.target.value
+      model: { description: event.target.value }
     })
   }
 
   handleTagsChange(tags) {
     this.props.actions.change({
-      tags: tags
+      model: { tags: tags }
     })
   }
 
   handleTimeChange(event) {
     const seconds = Math.max(2, Math.min(120, event.target.value)) * 60
     this.props.actions.change({
-      delta: seconds,
-      expiryTime: Moment().add(seconds, 'seconds')
+      meta: { delta: seconds },
+      model: { expiryTime: Moment().add(seconds, 'seconds') }
     })
   }
 

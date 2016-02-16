@@ -16,19 +16,20 @@ function tagsInputRenderLayout (tagComponents, inputComponent) {
 }
 
 function UnitForm({
-  expiryTime,
-  delta,
-  description,
+  meta,
+  model,
   disabled,
   handleSubmit,
   handleTagsChange,
   handleTimeChange,
-  handleDescriptionChange,
-  tags
+  handleDescriptionChange
 }) {
   const tagInputProps = {
     id: 'tags'
   }
+
+  const { delta } = meta
+  const { description, tags } = model
 
   return (
     <div className="unit-form">
@@ -83,9 +84,6 @@ function UnitForm({
 }
 
 UnitForm.propTypes = {
-  expiryTime: PropTypes.object.isRequired,
-  delta: PropTypes.number.isRequired,
-  description: PropTypes.string,
   disabled: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleTagsChange: PropTypes.func.isRequired,
